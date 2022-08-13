@@ -90,15 +90,15 @@ def division():
     global fst_num
     global operation
     oprator_list = [
-    ("+", plus, 5, 0, 1, 27, DISABLED),
-    ("-", minus, 5, 1, 1, 29, DISABLED),
-    ("/", division, 5, 2, 1, 29, DISABLED),
-    ("x", multiply, 6, 0, 1, 27, DISABLED),
-    ("clear", clear, 4, 0, 2, 50, None),
-    ("=", equal, 6, 2, 1, 27, DISABLED),
-    ("√", sqrt, 1, 4, 1, 25, None),
-    (".", comma, 6, 1, 1, 29, None),
-]
+        ("+", plus, 5, 0, 1, 27, DISABLED),
+        ("-", minus, 5, 1, 1, 29, DISABLED),
+        ("/", division, 5, 2, 1, 29, DISABLED),
+        ("x", multiply, 6, 0, 1, 27, DISABLED),
+        ("clear", clear, 4, 0, 2, 50, None),
+        ("=", equal, 6, 2, 1, 27, DISABLED),
+        ("√", sqrt, 1, 4, 1, 25, None),
+        (".", comma, 6, 1, 1, 29, None),
+    ]
     for operator, operationn, row, column, columnspan, padx, state in oprator_list:
         Button(
             root, text=operator, padx=padx, pady=25, command=operationn, state=state
@@ -245,7 +245,8 @@ def tan():
     numb = output.get()
     output.delete(0, "end")
     output.insert("end", math.tan(int(numb)))
-    
+
+
 def cosh():
     numb = output.get()
     output.delete(0, "end")
@@ -262,6 +263,7 @@ def tanh():
     numb = output.get()
     output.delete(0, "end")
     output.insert("end", math.tanh(float(numb)))
+
 
 def showh():
     global coshbutton
@@ -280,14 +282,14 @@ def showh():
         (">>", nex, None, 1, 3, 2),
         ("<<", back, SUNKEN, 2, 3, 2),
         ("del", delete, None, 0, 3, 2),
-        ("<<", hideh, None, 3, 4, 25)
+        ("<<", hideh, None, 3, 4, 25),
     ]
 
     for nb, fun, reli, row, column, size in next_back:
         Button(root, text=nb, relief=reli, command=fun, padx=size, pady=size).grid(
             row=row, column=column
         )
-    
+
 
 def show():
     global cosbutton
@@ -334,6 +336,7 @@ def hide():
             row=row, column=column
         )
 
+
 def hideh():
     root.geometry("600x490")
 
@@ -345,7 +348,7 @@ def hideh():
         (">>", nex, None, 1, 3, 2),
         ("<<", back, SUNKEN, 2, 3, 2),
         ("del", delete, None, 0, 3, 2),
-        (">>", showh, None, 3, 4, 25)
+        (">>", showh, None, 3, 4, 25),
     ]
 
     for nb, fun, reli, row, column, size in next_back:
@@ -382,7 +385,7 @@ next_back = [
     ("<<", back, SUNKEN, 2, 3, 2),
     ("del", delete, None, 0, 3, 2),
     (">>", show, None, 2, 4, 25),
-    (">>", showh, None, 3, 4, 25)
+    (">>", showh, None, 3, 4, 25),
 ]
 
 

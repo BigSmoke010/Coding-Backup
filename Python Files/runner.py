@@ -8,13 +8,19 @@ pygame.display.set_caption("runnin")
 clock = pygame.time.Clock()
 
 background = pygame.image.load(
-        "/home/walid/Coding/Python Files/images/runin/cartoon orange autumn leaves.jpg"
+    "/home/walid/Coding/Python Files/images/runin/cartoon orange autumn leaves.jpg"
 ).convert_alpha()
-enemy = pygame.image.load("/home/walid/Coding/Python Files/images/runin/mushroom.png").convert_alpha()
+enemy = pygame.image.load(
+    "/home/walid/Coding/Python Files/images/runin/mushroom.png"
+).convert_alpha()
 enemy = pygame.transform.scale(enemy, (50, 50))
-enemy1 = pygame.image.load("/home/walid/Coding/Python Files/images/runin/mushroom.png").convert_alpha()
+enemy1 = pygame.image.load(
+    "/home/walid/Coding/Python Files/images/runin/mushroom.png"
+).convert_alpha()
 enemy1 = pygame.transform.scale(enemy, (50, 50))
-enemy2 = pygame.image.load("/home/walid/Coding/Python Files/images/runin/mushroom.png").convert_alpha()
+enemy2 = pygame.image.load(
+    "/home/walid/Coding/Python Files/images/runin/mushroom.png"
+).convert_alpha()
 enemy2 = pygame.transform.scale(enemy, (50, 50))
 bomb = pygame.image.load(
     "/home/walid/Coding/Python Files/images/runin/Bomb.png"
@@ -30,9 +36,13 @@ ground = pygame.image.load(
 heroz = pygame.image.load(
     "/home/walid/Coding/Python Files/images/runin/superhero.png"
 ).convert_alpha()
-walkin1 = pygame.image.load('/home/walid/Coding/Python Files/images/runin/walkin1.png').convert_alpha()
+walkin1 = pygame.image.load(
+    "/home/walid/Coding/Python Files/images/runin/walkin1.png"
+).convert_alpha()
 walkin1 = pygame.transform.scale(walkin1, (50, 50))
-walkin2 = pygame.image.load('/home/walid/Coding/Python Files/images/runin/walkin2.png').convert_alpha()
+walkin2 = pygame.image.load(
+    "/home/walid/Coding/Python Files/images/runin/walkin2.png"
+).convert_alpha()
 walkin2 = pygame.transform.scale(walkin2, (50, 50))
 walkindex = 1
 walks = [walkin1, walkin2]
@@ -88,6 +98,7 @@ def deploy(chosen):
     litup.append(tup[chosen])
     screen.blit(litup[0][0], litup[0][1])
 
+
 def animated():
     global walkindex, hero
 
@@ -115,7 +126,6 @@ while runing:
                 if event.key == pygame.K_UP and state == "ground":
                     gravity = -20
                     state = "sky"
-                    
 
                 if event.key == pygame.K_RIGHT:
                     gravitix += 10
@@ -133,7 +143,6 @@ while runing:
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_UP:
                     herorect.top += 1
-                    
 
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     gravitix = 0
@@ -171,7 +180,7 @@ while runing:
         screen.blit(hero, herorect)
 
         deploy(enemmm)
-        
+
         collide = herorect.colliderect(litup[0][1])
         if collide:
             game = 2
@@ -186,8 +195,8 @@ while runing:
                 speed += 0.1
 
         elif litup[0][2] == "y":
-            deployed = True 
-            deploy(enemmm) 
+            deployed = True
+            deploy(enemmm)
             litup[0][1].y += speed
             if litup[0][1].y >= 450:
                 litup[0][1].y = 10
@@ -211,7 +220,6 @@ while runing:
                 spawned = False
                 enemy1rect.x = bombrect.x
                 enemy2rect.x = bombrect.x
-                
 
         gravity += 1
         herorect.y += gravity
@@ -265,7 +273,7 @@ while runing:
         x = startrec.collidepoint(pygame.mouse.get_pos())
         y = pygame.mouse.get_pressed()
         if x:
-            pygame.draw.rect(screen, 'red', startrec)
+            pygame.draw.rect(screen, "red", startrec)
             screen.blit(startinstr, startrec)
         if x and y[0]:
             game = 1

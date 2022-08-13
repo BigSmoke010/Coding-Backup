@@ -11,9 +11,9 @@ database = sql.connect("Passwords.db")
 cursor = database.cursor()
 btns_to_delete = []
 everything = list(
-        "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&²()*+,-./:;<=>?@[]^_`{|}~"
+    "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&²()*+,-./:;<=>?@[]^_`{|}~"
 )
-cursor.execute('CREATE TABLE IF NOT EXISTS Pass ( Pswrd )')
+cursor.execute("CREATE TABLE IF NOT EXISTS Pass ( Pswrd )")
 elements = []
 cursor.execute("CREATE TABLE IF NOT EXISTS Passwords (Passwrd , Website)")
 cursor.execute("SELECT oid, * FROM Pass")
@@ -231,7 +231,6 @@ def Delete():
     elabel.grid(row=9, column=1)
 
     btns_to_delete.extend((elabel, slct, slcbtn))
-
 
 
 root.mainloop()

@@ -43,6 +43,7 @@ else:
     print("invalid input")
     exit(0)
 
+
 def clear():
     global tl
     global t
@@ -510,18 +511,18 @@ def scndplyr(v, r, c):
 
         if userscore < opscore:
             opsscore.grid_forget()
-            opsscore = Label(root, text=opscore, fg="#38D523", bg='white')
+            opsscore = Label(root, text=opscore, fg="#38D523", bg="white")
             opsscore.grid(row=4, column=2)
             opsscore.configure(font="Verdana 15 underline")
             usscore.grid_forget()
-            usscore = Label(root, text=userscore, fg="#A30000", bg='white')
+            usscore = Label(root, text=userscore, fg="#A30000", bg="white")
             usscore.grid(row=4, column=0)
         elif userscore > opscore:
             opsscore.grid_forget()
-            opsscore = Label(root, text=opscore, fg="#A30000", bg='white')
+            opsscore = Label(root, text=opscore, fg="#A30000", bg="white")
             opsscore.grid(row=4, column=2)
             usscore.grid_forget()
-            usscore = Label(root, text=userscore, fg="#38D523", bg='white')
+            usscore = Label(root, text=userscore, fg="#38D523", bg="white")
             usscore.grid(row=4, column=0)
             usscore.configure(font="Verdana 15 underline")
 
