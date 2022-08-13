@@ -2,6 +2,7 @@
 ___
 All of my coding files and progress will be stored here
 
-#TODOS
+# TODOS
 ___
+
 * add 2 player mode in ping pong

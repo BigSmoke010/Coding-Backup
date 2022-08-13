@@ -1,5 +1,5 @@
 # The industrial revolution and its consequences
-___ 
+___
 ## The industrial revolution
 ### and
 #### its
