@@ -2,7 +2,10 @@ import random
 import bcrypt
 import os    # imports the modules
 
-password_path = 'TXT files/encrypted_pass.txt'
+homedir = os.getenv("HOME")
+password_path = homedir + '/Coding/Python Files/TXT files/encrypted_pass.txt'
+number_of_inputs = 0
+correct = False
 
 if os.stat(password_path).st_size == 0:
     new_pass = input("\nwhat is your new password : ")
@@ -11,7 +14,7 @@ if os.stat(password_path).st_size == 0:
 
     encrypted_pass = bcrypt.hashpw(bytes(encoded_pass), bcrypt.gensalt())
     
-    with open("TXT files/encrypted_pass.txt", "w") as a:
+    with open(password_path, "w") as a:
         a.write(encrypted_pass.decode('utf-8'))
         
     print("created password succesfully!")
@@ -19,22 +22,37 @@ if os.stat(password_path).st_size == 0:
     exit()
 
 else:
-    given_pass = input("\nwhat is your password : ")
+    while number_of_inputs < 4 and not correct:
+        given_pass = input("\nwhat is your password : ")
+        
+        given_encoded = given_pass.encode('utf-8')
+        
+        with open(password_path, "r") as z:
+            
+                
+            if(bcrypt.checkpw(bytes(given_encoded), bytes(z.read().encode('utf-8')))):
+                print('\nCorrect password\n')
+                correct = True
+            else:
+                print('\nIncorrect password\n')
+                number_of_inputs += 1
     
-    given_encoded = given_pass.encode('utf-8')
-        
-    with open("TXT files/encrypted_pass.txt", "r") as z:
-        if(bcrypt.checkpw(bytes(given_encoded), bytes(z.read().encode('utf-8')))):
-            print('\nCorrect password\n')
-        
+    if number_of_inputs == 4:
+        reset = input('it seems like you forgot your password, do you want to reset it ? [y/n] :')
+        if reset == 'y':
+            with open(password_path, "w") as create:
+                pass
+            with open ( homedir + "/Coding/Python Files/TXT files/passwords.txt", "w") as crete:
+                pass
+            exit()
         else:
-            print('\nIncorrect password\n')
+            print("ok")
             exit()
 
 everything = list(
     "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&²()*+,-./:;<=>?@[]^_`{|}~"
 )  # list of ASCII letters and numbers and symbols
-a = input("do you want to make a new password or show the current ones?[1,2] : ")
+a = input("do you want to make a new password or show the current ones or remove a password ?[1,2,3] : ")
 if a == "1":
     try:
         user = int(input("how many letters do you want : "))
@@ -54,11 +72,11 @@ if a == "1":
 
         name = input("what website or what should we name the file? : ")
         
-        with open("TXT files/passwords.txt", "r") as p:  # opens the file to read it
+        with open(homedir + "/Coding/Python Files/TXT files/passwords.txt", "r") as p:  # opens the file to read it
             
             file = p.read()
 
-            with open("TXT files/passwords.txt", "w") as k:  # opens the file to write in it
+            with open(homedir + "/Coding/Python Files/TXT files/passwords.txt", "w") as k:  # opens the file to write in it
                 if file == "":
                     k.write("".join(randomly) + " - " + name)
                     print("Saved the password Succesfully!")
@@ -73,9 +91,33 @@ if a == "1":
 
     else:
         print("ok")
-else:
-    with open ("TXT files/passwords.txt", "r") as r:
+        
+elif a == "2":
+    with open ( homedir + "/Coding/Python Files/TXT files/passwords.txt", "r") as r:
         print(r.read())
     wait_for_exit = input("")
     if wait_for_exit == "exit":
         exit()
+elif a == "3":
+    with open(homedir + "/Coding/Python Files/TXT files/passwords.txt", "r") as file_input:
+        lines = file_input.read()
+        print(lines)
+        selected = input('please input the name of the website to be deleted (c to clear all):')
+        if selected == 'c':
+            with open ( homedir + "/Coding/Python Files/TXT files/passwords.txt", "w") as cler:
+                pass
+            print('cleared passwords successfully')
+        with open(homedir + "/Coding/Python Files/TXT files/passwords.txt", "r") as input:
+            with open(homedir + "/Coding/Python Files/TXT files/temp.txt", "w") as output:
+                # iterate all lines from file
+                for line in input:
+                    # if substring contain in a line then don't write it
+                    if selected not in line.strip("\n"):
+                        output.write(line)
+
+        # replace file with original name
+        os.replace(homedir + "/Coding/Python Files/TXT files/temp.txt", homedir + "/Coding/Python Files/TXT files/passwords.txt")
+    
+    
+    
+    print('removed password successfully')
