@@ -14,36 +14,13 @@ font1 = pygame.font.Font("Python Files/Fonts/ARCADECLASSIC.TTF", 80)
 ballrect = ball.get_rect(topleft=[400, 300])
 bottom = Player.get_rect()
 enemyrect = Player.get_rect()
-preffered_side = input("which side do you want to play in [left/right] :")
 beep = pygame.mixer.Sound("Python Files/Sounds/Ping Pong/Blip_select 25.wav")
 beep1 = pygame.mixer.Sound("Python Files/Sounds/Ping Pong/Random 42.wav")
 font_rect_player = (0, 0)
 font_rect_bot = (0, 0)
 
 # sets the poistion of the player and enemy and adds the rectangles so it can have a better effect at the ball
-if preffered_side == "left":
-    bottom = Player.get_rect(topleft=[50, 350])
-    botmiddle = Player.get_rect(topleft=[50, 325])
-    topmiddle = Player.get_rect(topleft=[50, 300])
-    top = Player.get_rect(topleft=[50, 275])
-    enemybottom = Player.get_rect(topleft=[750, 350])
-    enemybotmiddle = Player.get_rect(topleft=[750, 325])
-    enemytopmiddle = Player.get_rect(topleft=[750, 300])
-    enemytop = Player.get_rect(topleft=[750, 275])
-    font_rect_palyer = (300, 100)
-    font_rect_bot = (500, 100)
 
-elif preffered_side == "right":
-    bottom = Player.get_rect(topleft=[750, 350])
-    botmiddle = Player.get_rect(topleft=[750, 325])
-    topmiddle = Player.get_rect(topleft=[750, 300])
-    top = Player.get_rect(topleft=[750, 275])
-    enemybottom = Player.get_rect(topleft=[50, 350])
-    enemybotmiddle = Player.get_rect(topleft=[50, 325])
-    enemytopmiddle = Player.get_rect(topleft=[50, 300])
-    enemytop = Player.get_rect(topleft=[50, 275])
-    font_rect_palyer = (500, 100)
-    font_rect_bot = (300, 100)
 
 running = True
 locked = True
@@ -58,6 +35,42 @@ enemygravity = 0
 ballgravitx = choice([3, -3])  # The effect at the ball's x axis
 ballgravity = choice([3, -3])  # The effect at the ball's y axis
 ballspeed = 3
+
+def draw(pref_side):
+    global bottom
+    global botmiddle
+    global topmiddle
+    global top
+    global enemybottom
+    global enemybotmiddle
+    global enemytopmiddle
+    global enemytop
+    global font_rect_palyer
+    global font_rect_bot
+    
+    if pref_side == "left":
+        bottom = Player.get_rect(topleft=[50, 350])
+        botmiddle = Player.get_rect(topleft=[50, 325])
+        topmiddle = Player.get_rect(topleft=[50, 300])
+        top = Player.get_rect(topleft=[50, 275])
+        enemybottom = Player.get_rect(topleft=[750, 350])
+        enemybotmiddle = Player.get_rect(topleft=[750, 325])
+        enemytopmiddle = Player.get_rect(topleft=[750, 300])
+        enemytop = Player.get_rect(topleft=[750, 275])
+        font_rect_palyer = (300, 100)
+        font_rect_bot = (500, 100)
+
+    elif pref_side == "right":
+        bottom = Player.get_rect(topleft=[750, 350])
+        botmiddle = Player.get_rect(topleft=[750, 325])
+        topmiddle = Player.get_rect(topleft=[750, 300])
+        top = Player.get_rect(topleft=[750, 275])
+        enemybottom = Player.get_rect(topleft=[50, 350])
+        enemybotmiddle = Player.get_rect(topleft=[50, 325])
+        enemytopmiddle = Player.get_rect(topleft=[50, 300])
+        enemytop = Player.get_rect(topleft=[50, 275])
+        font_rect_palyer = (500, 100)
+        font_rect_bot = (300, 100)
 
 while running:
     screen.fill("#948282")
@@ -120,7 +133,6 @@ while running:
         enemybotmidcollide = enemybotmiddle.colliderect(ballrect)
         enemytopmidcollide = enemytopmiddle.colliderect(ballrect)
         enemytopcollide = enemytop.colliderect(ballrect)
-
         if bottomcollide and preffered_side == "left":
             ballspeed += 0.1
             ballgravitx = ballspeed
@@ -288,8 +300,30 @@ while running:
     elif game == 2:
         title = font1.render("PING PONG", False, "orange")
         screen.blit(title, (220, 100))
-        title = font1.render("press S to start", False, "yellow")
+        title = font1.render("Select your side", False, "yellow")
         screen.blit(title, (110, 400))
-
+        mouse_pos = pygame.mouse.get_pos()
+        if  mouse_pos[0] < 400:
+            pygame.draw.rect(screen, '#550000', pygame.rect.Rect(0, 0, 400, 600))
+            title = font1.render("PING PONG", False, "orange")
+            screen.blit(title, (220, 100))
+            title = font1.render("Select your side", False, "yellow")
+            screen.blit(title, (110, 400))
+            click = pygame.mouse.get_pressed()
+            if click[0]:
+                preffered_side = 'left'
+                draw(preffered_side)
+                game = 1
+        if mouse_pos[0] > 400:
+            pygame.draw.rect(screen, '#550000', pygame.rect.Rect(400, 0, 400, 600))
+            title = font1.render("PING PONG", False, "orange")
+            screen.blit(title, (220, 100))
+            title = font1.render("Select your side", False, "yellow")
+            screen.blit(title, (110, 400))
+            click = pygame.mouse.get_pressed()
+            if click[0]:
+                preffered_side = 'right'
+                draw(preffered_side)
+                game = 1
     clock.tick(60)
     pygame.display.update()
