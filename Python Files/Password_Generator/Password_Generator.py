@@ -3,7 +3,7 @@ import bcrypt
 import os  # imports the modules
 
 homedir = os.getenv("HOME")  # gets the homedir (only works in linux)
-password_path = homedir + "/Coding/Python Files/TXT files/encrypted_pass.txt"
+password_path = homedir + "/Coding/Python Files/Password_Generator/TXT files/encrypted_pass.txt"
 number_of_inputs = 0
 correct = False
 
@@ -44,7 +44,7 @@ else:
             with open(password_path, "w") as create:
                 pass
             with open(
-                homedir + "/Coding/Python Files/TXT files/passwords.txt", "w"
+                homedir + "/Coding/Python Files/Password_Generator/TXT files/passwords.txt", "w"
             ) as crete:
                 pass
             exit()
@@ -78,13 +78,13 @@ if a == "1":
         name = input("what website or what should we name the file? : ")
 
         with open(
-            homedir + "/Coding/Python Files/TXT files/passwords.txt", "r"
+            homedir + "/Coding/Python Files/Password_Generator/TXT files/passwords.txt", "r"
         ) as p:  # opens the file to read it
 
             file = p.read()
 
             with open(
-                homedir + "/Coding/Python Files/TXT files/passwords.txt", "w"
+                homedir + "/Coding/Python Files/Password_Generator/TXT files/passwords.txt", "w"
             ) as k:  # opens the file to write in it
                 if file == "":
                     k.write("".join(randomly) + " - " + name)
@@ -102,14 +102,14 @@ if a == "1":
         print("ok")
 
 elif a == "2":
-    with open(homedir + "/Coding/Python Files/TXT files/passwords.txt", "r") as r:
+    with open(homedir + "/Coding/Python Files/Password_Generator/TXT files/passwords.txt", "r") as r:
         print(r.read())
     wait_for_exit = input("")
     if wait_for_exit == "exit":
         exit()
 elif a == "3":
     with open(
-        homedir + "/Coding/Python Files/TXT files/passwords.txt", "r"
+        homedir + "/Coding/Python Files/Password_Generator/TXT files/passwords.txt", "r"
     ) as file_input:
         lines = file_input.read()
         print(lines)
@@ -118,15 +118,15 @@ elif a == "3":
         )
         if selected == "c":
             with open(
-                homedir + "/Coding/Python Files/TXT files/passwords.txt", "w"
+                homedir + "/Coding/Python Files/Password_Generator/TXT files/passwords.txt", "w"
             ) as cler:
                 pass
             print("cleared passwords successfully")
         with open(
-            homedir + "/Coding/Python Files/TXT files/passwords.txt", "r"
+            homedir + "/Coding/Python Files/Password_Generator/TXT files/passwords.txt", "r"
         ) as input:
             with open(
-                homedir + "/Coding/Python Files/TXT files/temp.txt", "w"
+                homedir + "/Coding/Python Files/Password_Generator/TXT files/temp.txt", "w"
             ) as output:
                 # iterate all lines from file
                 for line in input:
@@ -136,8 +136,8 @@ elif a == "3":
 
         # replace file with original name
         os.replace(
-            homedir + "/Coding/Python Files/TXT files/temp.txt",
-            homedir + "/Coding/Python Files/TXT files/passwords.txt",
+            homedir + "/Coding/Python Files/Password_Generator/TXT files/temp.txt",
+            homedir + "/Coding/Python Files/Password_Generator/TXT files/passwords.txt",
         )
 
     print("removed password successfully")

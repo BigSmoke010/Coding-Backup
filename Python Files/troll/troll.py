@@ -1,16 +1,13 @@
 from tkinter import *
 from random import choice
-from PIL import ImageTk, Image
+from PIL import Imagetk, Image
 
 root = Tk()
-root.iconbitmap(
-    "@/home/walid/Coding/Python Files/images/troll/91df39a49ca139681e4914a6eff15d7b.xbm"
-)
 root.title("le trollage")
 root.configure(bg="white")
 num_list = [0, 1, 2]
 
-img = ImageTk.PhotoImage(
+img = Imagetk.PhotoImage(
     Image.open("images/troll/4-42120_bleed-area-may-not-be-visible-meme-troll.jpg")
 )
 back = Label(root, image=img)
