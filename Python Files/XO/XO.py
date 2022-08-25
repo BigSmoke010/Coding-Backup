@@ -6,13 +6,13 @@ from PIL import ImageTk, Image
 root = Tk()
 root.title("XO")
 background_image = ImageTk.PhotoImage(
-    Image.open(r"images/XO/XO1.png")
+    Image.open(r"images/XO1.png")
 )
 background_label = Label(root, image=background_image)
 background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
 # TODO:
-# change the background everytime someone wins
+# change the background everytime some one wins
 
 opscore = 0
 userscore = 0

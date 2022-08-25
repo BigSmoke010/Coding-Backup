@@ -2,25 +2,27 @@ import pygame
 from random import choice
 
 pygame.init()
+
 screen = pygame.display.set_mode((800, 600))
 clock = pygame.time.Clock()
+pygame.display.set_caption('pingpong')
+
 
 Player = pygame.image.load(
-    f"/home/walid/Coding/Python Files/images/PingPong/Untitled.png"
+    f"images/Untitled.png"
 ).convert_alpha()
-ball = pygame.image.load("Python Files/images/PingPong/ball.png").convert_alpha()
-font = pygame.font.Font("Python Files/Fonts/Minecrafter.Reg.ttf", 50)
-font1 = pygame.font.Font("Python Files/Fonts/ARCADECLASSIC.TTF", 80)
+ball = pygame.image.load("images/ball.png").convert_alpha()
+font = pygame.font.Font("Fonts/Minecrafter.Reg.ttf", 50)
+font1 = pygame.font.Font("Fonts/ARCADECLASSIC.TTF", 80)
 ballrect = ball.get_rect(topleft=[400, 300])
 bottom = Player.get_rect()
 enemyrect = Player.get_rect()
-beep = pygame.mixer.Sound("PSounds/Blip_select 25.wav")
-beep1 = pygame.mixer.Sound("Sounds/Random 42.wav")
+beep = pygame.mixer.Sound("sounds/Blip_select 25.wav")
+beep1 = pygame.mixer.Sound("sounds/Random 42.wav")
 font_rect_player = (0, 0)
 font_rect_bot = (0, 0)
 
 # sets the poistion of the player and enemy and adds the rectangles so it can have a better effect at the ball
-
 
 running = True
 locked = True
@@ -36,6 +38,14 @@ ballgravitx = choice([3, -3])  # The effect at the ball's x axis
 ballgravity = choice([3, -3])  # The effect at the ball's y axis
 ballspeed = 3
 
+twop = input('two player mode? [y/n]:')
+twoplayer = False
+if twop == 'y':
+    twoplayer = True
+    preffered_side = 'right'
+else:
+    twoplayer = False
+    
 def draw(pref_side):
     global bottom
     global botmiddle
@@ -83,9 +93,17 @@ while running:
                     playergravity = -5
                 if event.key == pygame.K_DOWN:
                     playergravity = 5
+                if twoplayer:
+                    if event.key == pygame.K_w:
+                        enemygravity = -5
+                    if event.key == pygame.K_s:
+                        enemygravity = 5
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                     playergravity = 0
+                if event.key == pygame.K_w or event.key == pygame.K_s:
+                    enemygravity = 0
+            
             if locked:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
@@ -111,12 +129,13 @@ while running:
         enemytopmiddle.y += enemygravity
         enemytop.y += enemygravity
         # moves the enemy so he follows the ball's y axis
-        if ballrect.y < enemybotmiddle.y:
+        if ballrect.y < enemybotmiddle.y and not twoplayer:
             enemygravity = -5
-        if ballrect.y > enemybotmiddle.y:
+        if ballrect.y > enemybotmiddle.y and not twoplayer:
             enemygravity = 5
-        if ballrect.y == enemybotmiddle.y:
+        if ballrect.y == enemybotmiddle.y and not twoplayer:
             enemygravity = 0
+            
         if ballrect.y <= 0:
             ballgravity = ballspeed
             beep1.play()
@@ -133,103 +152,104 @@ while running:
         enemybotmidcollide = enemybotmiddle.colliderect(ballrect)
         enemytopmidcollide = enemytopmiddle.colliderect(ballrect)
         enemytopcollide = enemytop.colliderect(ballrect)
-        if bottomcollide and preffered_side == "left":
-            ballspeed += 0.1
-            ballgravitx = ballspeed
-            ballgravity = 5
-            y = True
-            beep.play()
-        if botmidcollide and preffered_side == "left":
-            ballspeed += 0.1
-            ballgravitx = ballspeed
-            ballgravity = 1
-            y = True
-            beep.play()
-        if topmidcollide and preffered_side == "left":
-            ballspeed += 0.1
-            ballgravitx = ballspeed
-            ballgravity = -1
-            y = True
-            beep.play()
-        if topcollide and preffered_side == "left":
-            ballspeed += 0.1
-            ballgravitx = ballspeed
-            ballgravity = -5
-            y = True
-            beep.play()
-        if bottomcollide and preffered_side == "right":
-            ballspeed += 0.1
-            ballgravitx = -abs(ballspeed)
-            ballgravity = 5
-            y = True
-            beep.play()
-        if botmidcollide and preffered_side == "right":
-            ballspeed += 0.1
-            ballgravitx = -abs(ballspeed)
-            ballgravity = 1
-            y = True
-            beep.play()
-        if topmidcollide and preffered_side == "right":
-            ballspeed += 0.1
-            ballgravitx = -abs(ballspeed)
-            ballgravity = -1
-            y = True
-            beep.play()
-        if topcollide and preffered_side == "right":
-            ballspeed += 0.1
-            ballgravitx = -abs(ballspeed)
-            ballgravity = -5
-            y = True
-            beep.play()
-
-        if enemybottomcollide and preffered_side == "left":
-            ballspeed += 0.1
-            ballgravitx = -abs(ballspeed)
-            ballgravity = 5
-            y = True
-            beep.play()
-        if enemybotmidcollide and preffered_side == "left":
-            ballspeed += 0.1
-            ballgravitx = -abs(ballspeed)
-            ballgravity = 1
-            y = True
-            beep.play()
-        if enemytopmidcollide and preffered_side == "left":
-            ballspeed += 0.1
-            ballgravitx = -abs(ballspeed)
-            ballgravity = -1
-            y = True
-            beep.play()
-        if enemytopcollide and preffered_side == "left":
-            ballspeed += 0.1
-            ballgravitx = -abs(ballspeed)
-            ballgravity = -5
-            y = True
-            beep.play()
-        if enemybottomcollide and preffered_side == "right":
-            ballspeed += 0.1
-            ballgravitx = ballspeed
-            ballgravity = 5
-            y = True
-            beep.play()
-        if enemybotmidcollide and preffered_side == "right":
-            ballspeed += 0.1
-            ballgravitx = ballspeed
-            ballgravity = 1
-            y = True
-            beep.play()
-        if enemytopmidcollide and preffered_side == "right":
-            ballspeed += 0.1
-            ballgravitx = ballspeed
-            ballgravity = -1
-            y = True
-            beep.play()
-        if enemytopcollide and preffered_side == "right":
-            ballspeed += 0.1
-            ballgravitx = ballspeed
-            ballgravity = -5
-            y = True
-            beep.play()
+        if preffered_side == 'left':
+            if bottomcollide:
+                ballspeed += 0.1
+                ballgravitx = ballspeed
+                ballgravity = 5
+                y = True
+                beep.play()
+            if botmidcollide:
+                ballspeed += 0.1
+                ballgravitx = ballspeed
+                ballgravity = 1
+                y = True
+                beep.play()
+            if topmidcollide:
+                ballspeed += 0.1
+                ballgravitx = ballspeed
+                ballgravity = -1
+                y = True
+                beep.play()
+            if topcollide:
+                ballspeed += 0.1
+                ballgravitx = ballspeed
+                ballgravity = -5
+                y = True
+                beep.play()
+            if enemybottomcollide:
+                ballspeed += 0.1
+                ballgravitx = -abs(ballspeed)
+                ballgravity = 5
+                y = True
+                beep.play()
+            if enemybotmidcollide:
+                ballspeed += 0.1
+                ballgravitx = -abs(ballspeed)
+                ballgravity = 1
+                y = True
+                beep.play()
+            if enemytopmidcollide:
+                ballspeed += 0.1
+                ballgravitx = -abs(ballspeed)
+                ballgravity = -1
+                y = True
+                beep.play()
+            if enemytopcollide:
+                ballspeed += 0.1
+                ballgravitx = -abs(ballspeed)
+                ballgravity = -5
+                y = True
+                beep.play()
+        if preffered_side == 'right':
+            if bottomcollide:
+                ballspeed += 0.1
+                ballgravitx = -abs(ballspeed)
+                ballgravity = 5
+                y = True
+                beep.play()
+            if botmidcollide:
+                ballspeed += 0.1
+                ballgravitx = -abs(ballspeed)
+                ballgravity = 1
+                y = True
+                beep.play()
+            if topmidcollide:
+                ballspeed += 0.1
+                ballgravitx = -abs(ballspeed)
+                ballgravity = -1
+                y = True
+                beep.play()
+            if topcollide:
+                ballspeed += 0.1
+                ballgravitx = -abs(ballspeed)
+                ballgravity = -5
+                y = True
+                beep.play()
+            if enemybottomcollide:
+                ballspeed += 0.1
+                ballgravitx = ballspeed
+                ballgravity = 5
+                y = True
+                beep.play()
+            if enemybotmidcollide:
+                ballspeed += 0.1
+                ballgravitx = ballspeed
+                ballgravity = 1
+                y = True
+                beep.play()
+            if enemytopmidcollide:
+                ballspeed += 0.1
+                ballgravitx = ballspeed
+                ballgravity = -1
+                y = True
+                beep.play()
+            if enemytopcollide:
+                ballspeed += 0.1
+                ballgravitx = ballspeed
+                ballgravity = -5
+                y = True
+                beep.play()
         # limits the player's and the bot's y axis
         if top.y <= 0:
             top.y = 0
@@ -240,10 +260,16 @@ while running:
 
         if enemytop.y <= 0:
             enemyrect.y = 0
-            enemygravity = 5
+            if not twoplayer:
+                enemygravity = 5
+            if twoplayer:
+                enemygravity = 0
         if enemybottom.y >= 585:
             enemyrect.y = 585
-            enemygravity = -5
+            if not twoplayer:
+                enemygravity = -5
+            if twoplayer:
+                enemygravity = 0
 
         # adds 1 to the score depending on the position
         if ballrect.x >= 749 and preffered_side == "left":

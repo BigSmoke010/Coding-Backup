@@ -7,28 +7,28 @@ screen = pygame.display.set_mode((800, 600))
 
 clock = pygame.time.Clock()
 
-space = pygame.image.load("images/Space Shooter/1.webp").convert_alpha()
+space = pygame.image.load("images/1.webp").convert_alpha()
 space = pygame.transform.scale(space, (800, 600))
 
-player = pygame.image.load("images/Space Shooter/space.png").convert_alpha()
+player = pygame.image.load("images/space.png").convert_alpha()
 playerect = player.get_rect(topleft=[400, 500])
 
-bullet = pygame.image.load("images/Space Shooter/circle.png").convert_alpha()
+bullet = pygame.image.load("images/circle.png").convert_alpha()
 bulletrect = bullet.get_rect(topleft=[playerect.x, 500])
 
-bullet2 = pygame.image.load("images/Space Shooter/circle.png").convert_alpha()
+bullet2 = pygame.image.load("images/circle.png").convert_alpha()
 bullet2 = pygame.transform.rotate(bullet2, 30)
 bulletrect2 = bullet2.get_rect(topleft=[playerect.x, 500])
 
-bullet3 = pygame.image.load("images/Space Shooter/circle.png").convert_alpha()
+bullet3 = pygame.image.load("images/circle.png").convert_alpha()
 bullet3 = pygame.transform.rotate(bullet3, -30)
 bulletrect3 = bullet3.get_rect(topleft=[playerect.x, 500])
 
 
-warning_sign = pygame.image.load("images/Space Shooter/warning.png").convert_alpha()
+warning_sign = pygame.image.load("images/warning.png").convert_alpha()
 warning_sign = pygame.transform.scale(warning_sign, (50, 50))
 
-bonus = pygame.image.load("images/Space Shooter/Untitled.png").convert_alpha()
+bonus = pygame.image.load("images/Untitled.png").convert_alpha()
 bonusrect = bonus.get_rect(topleft=[randint(0, 800), 0])
 
 running = True
@@ -52,12 +52,12 @@ gravity = []
 
 num_of_enemies = 6
 
-bullet_shoot = pygame.mixer.Sound("Sounds/Space Shooter/Laser_shoot 4.wav")
-dead = pygame.mixer.Sound("Sounds/Space Shooter/Explosion 7.wav")
-warn = pygame.mixer.Sound("Sounds/Space Shooter/Random 12.wav")
+bullet_shoot = pygame.mixer.Sound("Sounds/Laser_shoot 4.wav")
+dead = pygame.mixer.Sound("Sounds/Explosion 7.wav")
+warn = pygame.mixer.Sound("Sounds/Random 12.wav")
 
 for i in range(num_of_enemies):
-    enemy.append(pygame.image.load("images/Space Shooter/alien1.png").convert_alpha())
+    enemy.append(pygame.image.load("images/alien1.png").convert_alpha())
     x = randint(0, 750)
     y = randint(0, 400)
     enemyrect.append(enemy[0].get_rect(topleft=(x, y)))
@@ -205,7 +205,7 @@ while running:
                 enemyrect[i].y = 0
                 game = 2
             if buletcolide or bullet2colide or bullet3colide:
-                redalen = pygame.image.load("images/Space Shooter/alien2.png")
+                redalen = pygame.image.load("images/alien2.png")
                 screen.blit(redalen, enemyrect[i])
                 enemyrect[i].x = randint(0, 750)
                 enemyrect[i].y = randint(0, enemyrect[i].y)

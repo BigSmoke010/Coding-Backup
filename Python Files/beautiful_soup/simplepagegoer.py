@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 
 bs = BeautifulSoup(requests.get('http://oceanofgames.com/').text, 'lxml')
+print(requests.get('https://oceanofgames.com/').text)
 pages = []
 
 def show(link):
