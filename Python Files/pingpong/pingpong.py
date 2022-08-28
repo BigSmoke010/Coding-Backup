@@ -258,14 +258,14 @@ while running:
             bottom.y = 585
             playergravity = 0
 
-        if enemytop.y <= 0:
+        if enemyrect.y <= 0:
             enemyrect.y = 0
             if not twoplayer:
                 enemygravity = 5
             if twoplayer:
                 enemygravity = 0
-        if enemybottom.y >= 585:
-            enemyrect.y = 585
+        if enemyrect.y >= 550:
+            enemyrect.y = 550
             if not twoplayer:
                 enemygravity = -5
             if twoplayer:
