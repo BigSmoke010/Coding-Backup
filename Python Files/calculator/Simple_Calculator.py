@@ -1,5 +1,5 @@
 import math
-
+import fire
 
 def calc(x, y, z=None) -> int:
 
@@ -28,12 +28,5 @@ def calc(x, y, z=None) -> int:
         print("invalid input")
 
 
-x1 = int(input("number1 : "))
-y1 = str(input("operator : "))
-
-if y1 == "sqr":
-    calc(x1, y1)
-
-else:
-    z1 = int(input("number2 :"))
-    calc(x1, y1, z1)
+if __name__ == '__main__':
+    fire.Fire(calc)
