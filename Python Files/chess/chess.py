@@ -5,7 +5,7 @@ cell_size = 50
 cell_number = 8
 screen = pygame.display.set_mode((cell_size * cell_number, cell_size * cell_number))
 clock = pygame.time.Clock()
-
+pygame.display.set_caption('chess')
 whitepeon = pygame.image.load('images/Chess_plt45.svg').convert_alpha()
 blackpeon = pygame.image.load('images/Chess_pdt45.svg').convert_alpha()
 whiteking = pygame.image.load('images/Chess_klt45.svg').convert_alpha()
@@ -21,6 +21,13 @@ whitepeonlist = [pygame.Rect(0 * cell_size, 1 *cell_size, cell_size, cell_size),
 blackpeonlist = [pygame.Rect(0 * cell_size, 6 *cell_size, cell_size, cell_size),pygame.Rect(1 * cell_size, 6 *cell_size, cell_size, cell_size),pygame.Rect(2 * cell_size, 6 *cell_size, cell_size, cell_size),pygame.Rect(3 * cell_size, 6 *cell_size, cell_size, cell_size),pygame.Rect(4 * cell_size, 6 *cell_size, cell_size, cell_size),pygame.Rect(5 * cell_size, 6 *cell_size, cell_size, cell_size),pygame.Rect(6 * cell_size, 6 *cell_size, cell_size, cell_size),pygame.Rect(7 * cell_size, 6 *cell_size, cell_size, cell_size)]
 running = True
 showhighlight = False
+showright = False
+showleft = False
+showrightb = False
+showleftb = False
+stuck = False
+stuckb = False
+danger = any
 pe = any
 stat = 'white'
 peonind = 0
@@ -49,15 +56,30 @@ def highlight(i):
             y = i.y - 50
             if i.y == 300:
                 allowedmoves = [pygame.Rect(i.x, y , cell_size,cell_size),pygame.Rect(i.x, y - 50 , cell_size,cell_size) ]
+            elif showrightb:
+                allowedmoves = [pygame.Rect(i.x, y , cell_size,cell_size), pygame.Rect(i.x + 50, i.y - 50 , cell_size,cell_size)]
+            elif showleftb:
+                allowedmoves = [pygame.Rect(i.x, y , cell_size,cell_size), pygame.Rect(i.x - 50, i.y - 50 , cell_size,cell_size)]
+            elif stuckb:
+                allowedmoves = []
             else:
                 allowedmoves = [pygame.Rect(i.x, y , cell_size,cell_size)]
         if stat == 'white':
             screen.blit(highlightimg,i)
             y = i.y + 50
             if i.y == 50:
-                allowedmoves = [pygame.Rect(i.x, y , cell_size,cell_size),pygame.Rect(i.x, y + 50 , cell_size,cell_size) ]
+                allowedmoves = [pygame.Rect(i.x, y , cell_size,cell_size),pygame.Rect(i.x, y + 50 , cell_size,cell_size)]
+            elif showright:
+                allowedmoves = [pygame.Rect(i.x, y , cell_size,cell_size), pygame.Rect(i.x + 50, i.y + 50 , cell_size,cell_size)]
+            elif showleft:
+                allowedmoves = [pygame.Rect(i.x, y , cell_size,cell_size), pygame.Rect(i.x - 50, i.y + 50 , cell_size,cell_size)]
+            elif showright and showleft:
+                allowedmoves = [pygame.Rect(i.x, y , cell_size,cell_size), pygame.Rect(i.x - 50, i.y + 50 , cell_size,cell_size),pygame.Rect(i.x + 50, i.y + 50 , cell_size,cell_size)]
+            elif stuck:
+                allowedmoves = []
             else:
                 allowedmoves = [pygame.Rect(i.x, y , cell_size,cell_size)]
+               
         for i in allowedmoves:
             pygame.draw.rect(screen,'red',i)
         
@@ -75,15 +97,28 @@ while running:
             if pygame.mouse.get_pressed()[0]:
                 if stat == 'black':
                     blackpeonlist[peonind] = move
+                    if move == danger:
+                        for i in whitepeonlist:
+                            if i == danger:
+                                whitepeonlist.remove(i)
+                        
                     stat = 'white'
                     allowedmoves = []
                     showhighlight = False
                 elif stat == 'white':
                     whitepeonlist[peonind] = move
+                    if move == danger:
+                        for i in blackpeonlist:
+                            if i == danger:
+                                blackpeonlist.remove(i)
+                        
                     stat = 'black'
                     allowedmoves = []
                     showhighlight = False
-                    
+                    showlefb = False
+                    showrightb = False
+                    showright = False
+                    showleft = False
     
     if stat == 'white':
         for index, i in enumerate(whitepeonlist):
@@ -103,6 +138,40 @@ while running:
                     stat = 'black'
                     showhighlight = True
                     highlight(pe)
+                    
+    for whitepeonb in whitepeonlist:
+        posiblekil = pygame.Rect(whitepeonb.x + 50, whitepeonb.y + 50, cell_size, cell_size)
+        posiblekil2 = pygame.Rect(whitepeonb.x - 50, whitepeonb.y + 50, cell_size, cell_size)
+        blocked = pygame.Rect(whitepeonb.x, whitepeonb.y + 50, cell_size, cell_size)
+        for blackpe in blackpeonlist:
+            if blackpe == posiblekil:
+                danger = blackpe
+                showright = True
+            if blackpe == posiblekil2:
+                danger = blackpe
+                showleft = True
+            if blackpe == blocked:
+                stuck = True
+            if blackpe == posiblekil2 and blackpe == posiblekil:
+                danger = blackpe
+                showright = True
+                showleft = True
+    for blackpeonb in blackpeonlist:
+        posiblekil = pygame.Rect(blackpeonb.x + 50, blackpeonb.y - 50, cell_size, cell_size)
+        posiblekil2 = pygame.Rect(blackpeonb.x - 50, blackpeonb.y - 50, cell_size, cell_size)
+        blocked = pygame.Rect(blackpeonb.x, blackpeonb.y - 50, cell_size, cell_size)
+        for whitpe in whitepeonlist:
+            if whitpe == posiblekil:
+                showrightb = True
+            if whitpe == posiblekil2:
+                showleftb = True
+            if whitpe == blocked:
+                stuckb = True
+            if whitpe == posiblekil and whitpe == posiblekil2:
+                showrightb = True
+                showleftb = True
+            
+                
     for z in whitepeonlist:
         screen.blit(whitepeon, z)
     for i in blackpeonlist:
