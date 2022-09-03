@@ -1,5 +1,5 @@
 import random
-
+from colorama import Fore
 numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 numbers_to_guess = 4
@@ -13,7 +13,7 @@ print(
     "All you need to do is guess the hidden number and the number of correct numbers will appear!\n"
 )
 
-play_answer = input("Do you want to play? [Y/N]: ")
+play_answer = input(f"{Fore.MAGENTA}Do you want to play? [Y/N]: {Fore.RESET}")
 
 attempts_left = 4
 
@@ -42,13 +42,13 @@ def get_remaining_numbers() -> int:
 
 
 def exit_message() -> None:
-    print("\nYou have no more attempts left!")
+    print(f"\n{Fore.RED}You have no more attempts left!{Fore.RESET}")
 
     print(f'The numbers were: {" ".join(numbers_generated)}')
 
 
 def success_message() -> None:
-    print("You found all the numbers!")
+    print(f"{Fore.GREEN}You found all the numbers!{Fore.RESET}")
 
     print(f'The generated numbers were {" ".join(numbers_generated)}')
 
@@ -71,7 +71,7 @@ while attempts_left > 0:
             exit_message()
             exit()
 
-        print("Invalid guess, try again.")
+        print(f"{Fore.CYAN}Invalid guess, try again.{Fore.RESET}")
         continue
 
     # Loop over generated numbers, check if a number is found

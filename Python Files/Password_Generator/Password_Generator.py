@@ -1,5 +1,6 @@
 import random
 import bcrypt
+from colorama import Fore
 import os  # imports the modules
 
 homedir = os.getenv("HOME")  # gets the homedir (only works in linux)
@@ -56,13 +57,13 @@ everything = list(
     "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&²()*+,-./:;<=>?@[]^_`{|}~"
 )  # list of ASCII letters and numbers and symbols
 a = input(
-    "do you want to make a new password or show the current ones or remove a password ?[1,2,3] : "
+    f"do you want to make a {Fore.BLUE}new password or {Fore.GREEN}show the current ones or {Fore.RED}remove a password ?[1,2,3] :{Fore.RESET} "
 )
 if a == "1":
     try:
         user = int(input("how many letters do you want : "))
     except ValueError:
-        print("Invalid Input!")
+        print(f"{Fore.RED}Invalid Input!")
         exit(1)
 
     randomly = random.choices(
@@ -88,7 +89,7 @@ if a == "1":
             ) as k:  # opens the file to write in it
                 if file == "":
                     k.write("".join(randomly) + " - " + name)
-                    print("Saved the password Succesfully!")
+                    print(f"{Fore.GREEN}Saved the password Succesfully!{Fore.RESET}")
 
                 else:
                     k.write(file)  # writes the file again to not overwrite it
