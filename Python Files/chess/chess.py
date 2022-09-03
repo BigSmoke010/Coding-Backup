@@ -28,6 +28,7 @@ showleftb = False
 stuck = False
 stuckb = False
 danger = any
+dangerb = any
 pe = any
 stat = 'white'
 peonind = 0
@@ -97,28 +98,35 @@ while running:
             if pygame.mouse.get_pressed()[0]:
                 if stat == 'black':
                     blackpeonlist[peonind] = move
-                    if move == danger:
-                        for i in whitepeonlist:
-                            if i == danger:
-                                whitepeonlist.remove(i)
-                        
-                    stat = 'white'
+                    if move == dangerb:
+                        for whitepeoninlist in whitepeonlist:
+                            if whitepeoninlist == dangerb:
+                                whitepeonlist.remove(whitepeoninlist)
+                                print('slave eatin')
+                    
                     allowedmoves = []
                     showhighlight = False
-                elif stat == 'white':
-                    whitepeonlist[peonind] = move
-                    if move == danger:
-                        for i in blackpeonlist:
-                            if i == danger:
-                                blackpeonlist.remove(i)
-                        
-                    stat = 'black'
-                    allowedmoves = []
-                    showhighlight = False
-                    showlefb = False
+                    showleftb = False
                     showrightb = False
                     showright = False
                     showleft = False
+                    stat = 'white'
+                elif stat == 'white':   
+                    whitepeonlist[peonind] = move
+                    if move == danger:
+                        for blackpeoninlist in blackpeonlist:
+                            if blackpeoninlist == danger:
+                                blackpeonlist.remove(blackpeoninlist)
+                                print('cock eaten')
+                        
+                    
+                    allowedmoves = []
+                    showhighlight = False
+                    showleftb = False
+                    showrightb = False
+                    showright = False
+                    showleft = False
+                    stat = 'black'
     
     if stat == 'white':
         for index, i in enumerate(whitepeonlist):
@@ -162,12 +170,15 @@ while running:
         blocked = pygame.Rect(blackpeonb.x, blackpeonb.y - 50, cell_size, cell_size)
         for whitpe in whitepeonlist:
             if whitpe == posiblekil:
+                dangerb = whitpe
                 showrightb = True
             if whitpe == posiblekil2:
+                dangerb = whitpe
                 showleftb = True
             if whitpe == blocked:
                 stuckb = True
             if whitpe == posiblekil and whitpe == posiblekil2:
+                dangerb = whitpe
                 showrightb = True
                 showleftb = True
             
