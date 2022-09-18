@@ -19,6 +19,8 @@ blackslave = pygame.image.load('images/Chess_bdt45.svg').convert_alpha()
 highlightimg = pygame.image.load('images/highlight.png').convert_alpha()
 whitepeonlist = [pygame.Rect(0 * cell_size, 1 *cell_size, cell_size, cell_size),pygame.Rect(1 * cell_size, 1 *cell_size, cell_size, cell_size),pygame.Rect(2 * cell_size, 1 *cell_size, cell_size, cell_size),pygame.Rect(3 * cell_size, 1 *cell_size, cell_size, cell_size),pygame.Rect(4 * cell_size, 1 *cell_size, cell_size, cell_size),pygame.Rect(5 * cell_size, 1 *cell_size, cell_size, cell_size),pygame.Rect(6 * cell_size, 1 *cell_size, cell_size, cell_size),pygame.Rect(7 * cell_size, 1 *cell_size, cell_size, cell_size)]
 blackpeonlist = [pygame.Rect(0 * cell_size, 6 *cell_size, cell_size, cell_size),pygame.Rect(1 * cell_size, 6 *cell_size, cell_size, cell_size),pygame.Rect(2 * cell_size, 6 *cell_size, cell_size, cell_size),pygame.Rect(3 * cell_size, 6 *cell_size, cell_size, cell_size),pygame.Rect(4 * cell_size, 6 *cell_size, cell_size, cell_size),pygame.Rect(5 * cell_size, 6 *cell_size, cell_size, cell_size),pygame.Rect(6 * cell_size, 6 *cell_size, cell_size, cell_size),pygame.Rect(7 * cell_size, 6 *cell_size, cell_size, cell_size)]
+whitekingrect = pygame.Rect(3* cell_size, 0 * cell_size, cell_size, cell_size)
+blackkingrect = pygame.Rect(3* cell_size, 7 * cell_size, cell_size, cell_size)
 running = True
 showhighlight = False
 showright = False
@@ -33,6 +35,7 @@ pe = any
 stat = 'white'
 peonind = 0
 allowedmoves = []
+
 def drawboard():
     firstcol = '#72ae50'
     for x in range(cell_number):
@@ -102,7 +105,6 @@ while running:
                         for whitepeoninlist in whitepeonlist:
                             if whitepeoninlist == dangerb:
                                 whitepeonlist.remove(whitepeoninlist)
-                                print('slave eatin')
                     
                     allowedmoves = []
                     showhighlight = False
@@ -117,7 +119,6 @@ while running:
                         for blackpeoninlist in blackpeonlist:
                             if blackpeoninlist == danger:
                                 blackpeonlist.remove(blackpeoninlist)
-                                print('cock eaten')
                         
                     
                     allowedmoves = []
@@ -187,6 +188,8 @@ while running:
         screen.blit(whitepeon, z)
     for i in blackpeonlist:
         screen.blit(blackpeon, i)
+    screen.blit(whiteking, whitekingrect)
+    screen.blit(blackking, blackkingrect)
     highlight(pe)
     
     
