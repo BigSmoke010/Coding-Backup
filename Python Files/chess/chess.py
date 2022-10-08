@@ -77,8 +77,8 @@ highlightimg = pygame.image.load('images/highlight.png').convert_alpha()
 redrect = pygame.draw.rect(screen, 'red',
                            pygame.rect.Rect(10, 10, cell_size, cell_size))
 selectedindex = 0
-allblackdoublerects = [blackbishoprects + blacktowerrects + blackhorserects]
-allwhitedoublerects = [whitebishoprects + whitetowerrects + whitehorserects]
+allblackdoublerects = blackbishoprects + blacktowerrects + blackhorserects
+allwhitedoublerects = whitebishoprects + whitetowerrects + whitehorserects
 stat = 'white'
 selected = any
 showsuggests = False
@@ -287,7 +287,7 @@ def horsehighlights(x):
 
 
 def highlight(x):
-    global redrect, stat, selectedindex, showsuggests, blackkingrect, whitekingrect, whitequeenrect, blackqueenrect
+    global redrect, stat, selectedindex, showsuggests, blackkingrect, whitekingrect, whitequeenrect, blackqueenrect, posibility,posibility2
     if showsuggests:
 
         if stat == 'white':
@@ -312,7 +312,13 @@ def highlight(x):
                                 pygame.rect.Rect(x.x, x.y + 50, cell_size,
                                                  cell_size))
                         ]
+            posibility = pygame.rect.Rect(
+                x.x + 50, x.y + 50, cell_size, cell_size)
+            posibility2 = pygame.rect.Rect(
+                                x.x - 50, x.y + 50, cell_size, cell_size)
             for i in blackpeonlist:
+                for y in whitepeonlist:
+                    if y == x:
                             posibility = pygame.rect.Rect(
                                 x.x + 50, x.y + 50, cell_size, cell_size)
                             posibility2 = pygame.rect.Rect(
@@ -322,41 +328,31 @@ def highlight(x):
                                     redrect.append(
                                         pygame.draw.rect(
                                             screen, 'red', posibility))
-                            if posibility == blacktowerrects[0] or posibility == blacktowerrects[1]:
-                                if posibility not in redrect:
-                                    redrect.append(
-                                        pygame.draw.rect(
-                                            screen, 'red', posibility))
-                            if posibility == blackhorserects[0] or posibility == blackhorserects[1]:
-                                if posibility not in redrect:
-                                    redrect.append(
-                                        pygame.draw.rect(
-                                            screen, 'red', posibility))
-                            if posibility == blackbishoprects[0] or posibility == blackhorserects[1]:
-                                if posibility not in redrect:
-                                    redrect.append(
-                                        pygame.draw.rect(
-                                            screen, 'red', posibility))
+                            
                             if posibility2 == i or posibility2 == blackkingrect or posibility2 == blackqueenrect:
                                 if posibility2 not in redrect:
                                     redrect.append(
                                         pygame.draw.rect(
                                             screen, 'red', posibility2))
-                            if posibility2 == blacktowerrects[0] or posibility2 == blacktowerrects[1]:
-                                if posibility2 not in redrect:
-                                    redrect.append(
-                                        pygame.draw.rect(
-                                            screen, 'red', posibility2))
-                            if posibility2 == blackhorserects[0] or posibility2 == blackhorserects[1]:
-                                if posibility2 not in redrect:
-                                    redrect.append(
-                                        pygame.draw.rect(
-                                            screen, 'red', posibility2))
-                            if posibility2 == blackbishoprects[0] or posibility2 == blackhorserects[1]:
-                                if posibility2 not in redrect:
-                                    redrect.append(
-                                        pygame.draw.rect(
-                                            screen, 'red', posibility2))
+            for fr in allblackdoublerects:
+                print(f'piece{fr}')
+                print(f'posibility1 {posibility}')
+                print(f'posibility2 {posibility2}')
+                if posibility.x == fr.x and posibility.y == fr.y:
+                    print('ni-')
+                    if posibility not in redrect:
+                        print('tri')
+                        redrect.append(
+                            pygame.draw.rect(
+                                screen, 'red', posibility))
+                if posibility2 == fr:
+                    print('tiri')
+                    if posibility2 not in redrect:
+                        print('ti')
+                        redrect.append(
+                            pygame.draw.rect(
+                                screen, 'red', posibility2))
+                                
             if x == whitekingrect:
                 selectedindex = 17
                 redrect = [
@@ -444,6 +440,8 @@ def highlight(x):
                                                  cell_size))
                         ]
                     for i in whitepeonlist:
+                        for y in blackpeonlist:
+                          if y == x:
                             posibility = pygame.rect.Rect(
                                 x.x + 50, x.y - 50, cell_size, cell_size)
                             posibility2 = pygame.rect.Rect(

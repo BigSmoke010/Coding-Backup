@@ -4,9 +4,6 @@ import requests
 
 job = input("search for a job :")
 unfamiliar = input("do you have any skills youre unfamiliaar with ? :")
-print(requests.get(
-            f"https://www.timesjobs.com/candidate/job-search.html?searchType=personalizedSearch&from=submit&txtKeywords={job}&txtLocation="
-        ).text)
 def jobityjab():
     replaced = job.replace(" ", "+")
     page = BeautifulSoup(
