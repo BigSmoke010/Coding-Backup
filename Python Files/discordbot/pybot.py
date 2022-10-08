@@ -2,9 +2,10 @@ import discord
 import asyncpraw
 from discord.ext import commands
 from random import choice
-from requests import get
+import requests
 from os import getenv
 from dotenv import load_dotenv
+import json
 
 load_dotenv('.env')
 bot = commands.Bot(command_prefix='p#', intents=discord.Intents.all())
@@ -32,8 +33,9 @@ async def catpic(ctx):
 	async for i in submissions:
 		if i.url[-4:] == '.jpg' or i.url[-4:] == '.png':
 			chosensubs.append(i.url)
-
-	await ctx.send(choice(chosensubs))
+	chosub = choice(chosensubs)
+	embed = discord.Embed(title=chosub.title).set_image(chosub)
+	await ctx.send(embed=embed)
 
 @bot.command(name='nsfw')
 async def catpic(ctx):
@@ -101,9 +103,18 @@ async def helpq(ctx):
             
 @bot.command(name='8ball')
 async def ball(ctx):
-	req = get('https://8ball.delegator.com/magic/JSON/' + ctx.message.content[8:]).text
-	embed = discord.Embed(title=req['magic']['type'], description=req['magic']['answer'])
+	req = requests.get('https://8ball.delegator.com/magic/JSON/' + ctx.message.content[8:]).text
+	jsonresp = json.loads(req)
+	embed = discord.Embed(title=ctx.message.content[8:], description=jsonresp["magic"]["answer"])
 	await ctx.send(embed=embed)
+
+@bot.command(name='inspier')
+async def inspiration(ctx):
+	req = requests.get('https://zenquotes.io/api/random').text
+	jsonresp = json.loads(req)
+	quote = jsonresp[0]['q']
+	author = jsonresp[0]['a']
+	await ctx.send(f'{quote}\n-{author}') 
 
 @bot.command(name='say')
 async def goodmorning(ctx):
