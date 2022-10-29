@@ -24,7 +24,6 @@ bullet3 = pygame.image.load("images/circle.png").convert_alpha()
 bullet3 = pygame.transform.rotate(bullet3, -30)
 bulletrect3 = bullet3.get_rect(topleft=[playerect.x, 500])
 
-
 warning_sign = pygame.image.load("images/warning.png").convert_alpha()
 warning_sign = pygame.transform.scale(warning_sign, (50, 50))
 
@@ -43,7 +42,6 @@ bonusss = False
 bonusfunc = False
 
 gravitix = 0
-
 
 enemy = []
 enemyrect = []
@@ -232,12 +230,8 @@ while running:
             bulletrect.y = 500
             shoted = False
 
-        if (
-            bulletrect.y <= 0
-            and bonusss
-            and bulletrect2.x <= 0
-            and bulletrect3.x >= 800
-        ):
+        if (bulletrect.y <= 0 and bonusss and bulletrect2.x <= 0
+                and bulletrect3.x >= 800):
             bulletrect.y = 500
             bulletrect3.y = 500
             bulletrect3.x = 400

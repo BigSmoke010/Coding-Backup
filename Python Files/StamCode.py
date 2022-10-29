@@ -1,5 +1,6 @@
 import random
 from colorama import Fore
+
 numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 numbers_to_guess = 4

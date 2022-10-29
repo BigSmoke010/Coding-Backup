@@ -33,19 +33,25 @@ def sub():
         option = IntVar()
         option.set(0)
 
-        selection = Radiobutton(
-            root1, text="Show Passwords", variable=option, value=0, command=Show
-        )
+        selection = Radiobutton(root1,
+                                text="Show Passwords",
+                                variable=option,
+                                value=0,
+                                command=Show)
         selection.grid(row=0, column=1)
 
-        selection2 = Radiobutton(
-            root1, text="Create New Password", variable=option, value=1, command=Create
-        )
+        selection2 = Radiobutton(root1,
+                                 text="Create New Password",
+                                 variable=option,
+                                 value=1,
+                                 command=Create)
         selection2.grid(row=1, column=1)
 
-        selection3 = Radiobutton(
-            root1, text="Delete Password", variable=option, value=2, command=Delete
-        )
+        selection3 = Radiobutton(root1,
+                                 text="Delete Password",
+                                 variable=option,
+                                 value=2,
+                                 command=Delete)
         selection3.grid(row=2, column=1)
 
         root1.columnconfigure(0, minsize=150)
@@ -74,8 +80,8 @@ if valid == []:
         root.quit()
 
     newind = Label(
-        root, text="it looks like you dont have a password please create a new one"
-    )
+        root,
+        text="it looks like you dont have a password please create a new one")
     newind.grid(row=0, column=1)
 
     frame = LabelFrame(root, text="Enter your new password")
@@ -99,8 +105,7 @@ else:
 
     def forgor():
         yn = messagebox.askyesno(
-            "password reset", "Are You Sure You Want To Reset Your Password"
-        )
+            "password reset", "Are You Sure You Want To Reset Your Password")
         if yn == 1:
             cursor.execute("DELETE FROM Pass WHERE oid = 1")
             database.commit()
@@ -152,9 +157,13 @@ def Add():
     choi = choilab.cget("text")
     crsr.execute(
         "INSERT INTO Passwords(Passwrd , Website) VALUES (:web, :choi)",
-        {"web": web, "choi": choi},
+        {
+            "web": web,
+            "choi": choi
+        },
     )
-    labpas = Label(root1, text="succesfully added " + str(choi) + " - " + str(web))
+    labpas = Label(root1,
+                   text="succesfully added " + str(choi) + " - " + str(web))
     labpas.grid(row=11, column=1)
     db.commit()
     db.close()

@@ -22,9 +22,12 @@ def plus():
         (".", comma, 6, 1, 1, 29, None),
     ]
     for operator, operationn, row, column, columnspan, padx, state in oprator_list:
-        Button(
-            root, text=operator, padx=padx, pady=25, command=operationn, state=state
-        ).grid(row=row, column=column, columnspan=columnspan)
+        Button(root,
+               text=operator,
+               padx=padx,
+               pady=25,
+               command=operationn,
+               state=state).grid(row=row, column=column, columnspan=columnspan)
     operation = "addition"
     fst_num = output.get()
     output.delete(0, "end")
@@ -45,9 +48,12 @@ def minus():
         (".", comma, 6, 1, 1, 29, None),
     ]
     for operator, operationn, row, column, columnspan, padx, state in oprator_list:
-        Button(
-            root, text=operator, padx=padx, pady=25, command=operationn, state=state
-        ).grid(row=row, column=column, columnspan=columnspan)
+        Button(root,
+               text=operator,
+               padx=padx,
+               pady=25,
+               command=operationn,
+               state=state).grid(row=row, column=column, columnspan=columnspan)
     operation = "minus"
     fst_num = output.get()
     output.delete(0, "end")
@@ -69,9 +75,12 @@ def multiply():
         (".", comma, 6, 1, 1, 29, None),
     ]
     for operator, operationn, row, column, columnspan, padx, state in oprator_list:
-        Button(
-            root, text=operator, padx=padx, pady=25, command=operationn, state=state
-        ).grid(row=row, column=column, columnspan=columnspan)
+        Button(root,
+               text=operator,
+               padx=padx,
+               pady=25,
+               command=operationn,
+               state=state).grid(row=row, column=column, columnspan=columnspan)
     operation = "multiplication"
     fst_num = output.get()
     output.delete(0, "end")
@@ -80,9 +89,12 @@ def multiply():
 
 def clear():
     for operator, operationn, row, column, columnspan, padx, state in oprator_list:
-        Button(
-            root, text=operator, padx=padx, pady=25, command=operationn, state=None
-        ).grid(row=row, column=column, columnspan=columnspan)
+        Button(root,
+               text=operator,
+               padx=padx,
+               pady=25,
+               command=operationn,
+               state=None).grid(row=row, column=column, columnspan=columnspan)
     output.delete(0, "end")
 
 
@@ -100,9 +112,12 @@ def division():
         (".", comma, 6, 1, 1, 29, None),
     ]
     for operator, operationn, row, column, columnspan, padx, state in oprator_list:
-        Button(
-            root, text=operator, padx=padx, pady=25, command=operationn, state=state
-        ).grid(row=row, column=column, columnspan=columnspan)
+        Button(root,
+               text=operator,
+               padx=padx,
+               pady=25,
+               command=operationn,
+               state=state).grid(row=row, column=column, columnspan=columnspan)
     operation = "division"
     fst_num = output.get()
     output.delete(0, "end")
@@ -148,9 +163,12 @@ def equal():
         (".", comma, 6, 1, 1, 29, None),
     ]
     for operator, operationn, row, column, columnspan, padx, state in oprator_list:
-        Button(
-            root, text=operator, padx=padx, pady=25, command=operationn, state=state
-        ).grid(row=row, column=column, columnspan=columnspan)
+        Button(root,
+               text=operator,
+               padx=padx,
+               pady=25,
+               command=operationn,
+               state=state).grid(row=row, column=column, columnspan=columnspan)
     scn_num = output.get()
     output.delete(0, "end")
     if operation == "addition":
@@ -210,18 +228,16 @@ def equal():
 def nex():
     next_back = [(">>", nex, SUNKEN, 1, 3), ("<<", back, None, 2, 3)]
     for nb, fun, reli, row, column in next_back:
-        Button(root, text=nb, relief=reli, command=fun, padx=2, pady=2).grid(
-            row=row, column=column
-        )
+        Button(root, text=nb, relief=reli, command=fun, padx=2,
+               pady=2).grid(row=row, column=column)
     root.geometry("500x490")
 
 
 def back():
     next_back = [(">>", nex, None, 1, 3), ("<<", back, SUNKEN, 2, 3)]
     for nb, fun, reli, row, column in next_back:
-        Button(root, text=nb, relief=reli, command=fun, padx=2, pady=2).grid(
-            row=row, column=column
-        )
+        Button(root, text=nb, relief=reli, command=fun, padx=2,
+               pady=2).grid(row=row, column=column)
     root.geometry("245x490")
 
 
@@ -286,9 +302,8 @@ def showh():
     ]
 
     for nb, fun, reli, row, column, size in next_back:
-        Button(root, text=nb, relief=reli, command=fun, padx=size, pady=size).grid(
-            row=row, column=column
-        )
+        Button(root, text=nb, relief=reli, command=fun, padx=size,
+               pady=size).grid(row=row, column=column)
 
 
 def show():
@@ -312,9 +327,8 @@ def show():
     ]
 
     for nb, fun, reli, row, column, size in next_back:
-        Button(root, text=nb, relief=reli, command=fun, padx=size, pady=size).grid(
-            row=row, column=column
-        )
+        Button(root, text=nb, relief=reli, command=fun, padx=size,
+               pady=size).grid(row=row, column=column)
 
 
 def hide():
@@ -332,9 +346,8 @@ def hide():
     ]
 
     for nb, fun, reli, row, column, size in next_back:
-        Button(root, text=nb, relief=reli, command=fun, padx=size, pady=size).grid(
-            row=row, column=column
-        )
+        Button(root, text=nb, relief=reli, command=fun, padx=size,
+               pady=size).grid(row=row, column=column)
 
 
 def hideh():
@@ -352,9 +365,8 @@ def hideh():
     ]
 
     for nb, fun, reli, row, column, size in next_back:
-        Button(root, text=nb, relief=reli, command=fun, padx=size, pady=size).grid(
-            row=row, column=column
-        )
+        Button(root, text=nb, relief=reli, command=fun, padx=size,
+               pady=size).grid(row=row, column=column)
 
 
 oprator_list = [
@@ -392,9 +404,12 @@ next_back = [
 def click(number) -> int:
     output.insert("end", number)
     for operator, operationn, row, column, columnspan, padx, state in oprator_list:
-        Button(
-            root, text=operator, padx=padx, pady=25, command=operationn, state=None
-        ).grid(row=row, column=column, columnspan=columnspan)
+        Button(root,
+               text=operator,
+               padx=padx,
+               pady=25,
+               command=operationn,
+               state=None).grid(row=row, column=column, columnspan=columnspan)
     a = output.get()
     if a[0] == "+":
         output.delete(0, "end")
@@ -420,18 +435,22 @@ output2 = Entry(fram2, width=25)
 output2.grid(row=0, column=0)
 
 for number, row, column in button_list:
-    Button(root, text=number, padx=27, pady=25, command=lambda a=number: click(a)).grid(
-        row=row, column=column
-    )
+    Button(root,
+           text=number,
+           padx=27,
+           pady=25,
+           command=lambda a=number: click(a)).grid(row=row, column=column)
 
 for operator, operationn, row, column, columnspan, padx, state in oprator_list:
-    Button(
-        root, text=operator, padx=padx, pady=25, command=operationn, state=state
-    ).grid(row=row, column=column, columnspan=columnspan)
+    Button(root,
+           text=operator,
+           padx=padx,
+           pady=25,
+           command=operationn,
+           state=state).grid(row=row, column=column, columnspan=columnspan)
 
 for nb, fun, reli, row, column, size in next_back:
-    Button(root, text=nb, relief=reli, command=fun, padx=size, pady=size).grid(
-        row=row, column=column
-    )
+    Button(root, text=nb, relief=reli, command=fun, padx=size,
+           pady=size).grid(row=row, column=column)
 
 root.mainloop()

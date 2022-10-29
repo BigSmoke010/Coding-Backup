@@ -11,38 +11,35 @@ background = pygame.image.load(
     "/home/walid/Coding/Python Files/images/runin/cartoon orange autumn leaves.jpg"
 ).convert_alpha()
 enemy = pygame.image.load(
-    "/home/walid/Coding/Python Files/images/runin/mushroom.png"
-).convert_alpha()
+    "/home/walid/Coding/Python Files/images/runin/mushroom.png").convert_alpha(
+    )
 enemy = pygame.transform.scale(enemy, (50, 50))
 enemy1 = pygame.image.load(
-    "/home/walid/Coding/Python Files/images/runin/mushroom.png"
-).convert_alpha()
+    "/home/walid/Coding/Python Files/images/runin/mushroom.png").convert_alpha(
+    )
 enemy1 = pygame.transform.scale(enemy, (50, 50))
 enemy2 = pygame.image.load(
-    "/home/walid/Coding/Python Files/images/runin/mushroom.png"
-).convert_alpha()
+    "/home/walid/Coding/Python Files/images/runin/mushroom.png").convert_alpha(
+    )
 enemy2 = pygame.transform.scale(enemy, (50, 50))
 bomb = pygame.image.load(
-    "/home/walid/Coding/Python Files/images/runin/Bomb.png"
-).convert_alpha()
+    "/home/walid/Coding/Python Files/images/runin/Bomb.png").convert_alpha()
 bomb = pygame.transform.scale(bomb, (30, 50))
 flyingenemy = pygame.image.load(
-    "/home/walid/Coding/Python Files/images/runin/eagle.png"
-).convert_alpha()
+    "/home/walid/Coding/Python Files/images/runin/eagle.png").convert_alpha()
 flyingenemy = pygame.transform.scale(flyingenemy, (50, 50))
 ground = pygame.image.load(
-    "/home/walid/Coding/Python Files/images/runin/ground.png"
-).convert_alpha()
+    "/home/walid/Coding/Python Files/images/runin/ground.png").convert_alpha()
 heroz = pygame.image.load(
     "/home/walid/Coding/Python Files/images/runin/superhero.png"
 ).convert_alpha()
 walkin1 = pygame.image.load(
-    "/home/walid/Coding/Python Files/images/runin/walkin1.png"
-).convert_alpha()
+    "/home/walid/Coding/Python Files/images/runin/walkin1.png").convert_alpha(
+    )
 walkin1 = pygame.transform.scale(walkin1, (50, 50))
 walkin2 = pygame.image.load(
-    "/home/walid/Coding/Python Files/images/runin/walkin2.png"
-).convert_alpha()
+    "/home/walid/Coding/Python Files/images/runin/walkin2.png").convert_alpha(
+    )
 walkin2 = pygame.transform.scale(walkin2, (50, 50))
 walkindex = 1
 walks = [walkin1, walkin2]
@@ -66,8 +63,10 @@ tup = [
     (bomb, bombrect, "y"),
 ]
 litup = []
-font = pygame.font.Font("/home/walid/Coding/Python Files/Fonts/ARCADECLASSIC.TTF", 40)
-font1 = pygame.font.Font("/home/walid/Coding/Python Files/Fonts/ARCADE.TTF", 40)
+font = pygame.font.Font(
+    "/home/walid/Coding/Python Files/Fonts/ARCADECLASSIC.TTF", 40)
+font1 = pygame.font.Font("/home/walid/Coding/Python Files/Fonts/ARCADE.TTF",
+                         40)
 
 score = 0
 
@@ -234,7 +233,8 @@ while runing:
         elif herorect.x <= 0:
             herorect.x = 0
 
-        textscore = font.render("Enemies  dodged  " + str(score), False, "#9DCC18")
+        textscore = font.render("Enemies  dodged  " + str(score), False,
+                                "#9DCC18")
         screen.blit(textscore, scorerect)
 
         x = pygame.time.get_ticks()
@@ -245,8 +245,8 @@ while runing:
         text = font.render("GAME OVER", False, "#FF2929")
         textr = font1.render("(press R to restart)", False, "#2941FF")
         texxts = font1.render(
-            "you lasted " + str(int(x / 1000)) + " seconds !", False, "#C8D81C"
-        )
+            "you lasted " + str(int(x / 1000)) + " seconds !", False,
+            "#C8D81C")
         screen.blit(text, (280, 200))
         screen.blit(textr, (200, 300))
         screen.blit(texxts, (170, 150))
@@ -260,14 +260,14 @@ while runing:
         screen.blit(herobg, (0, 0))
 
         heroimg = pygame.image.load(
-            "/home/walid/Coding/Python Files/images/runin/Untitled.png"
-        )
+            "/home/walid/Coding/Python Files/images/runin/Untitled.png")
         screen.blit(heroimg, (-20, 0))
 
         gametitle = font.render("runner", False, "#89FF1E")
         screen.blit(gametitle, (320, 100))
 
-        startinstr = font1.render("Click Here or press S to Start", False, "#5A840C")
+        startinstr = font1.render("Click Here or press S to Start", False,
+                                  "#5A840C")
         startrec = startinstr.get_rect(topleft=[150, 400])
         screen.blit(startinstr, startrec)
         x = startrec.collidepoint(pygame.mouse.get_pos())

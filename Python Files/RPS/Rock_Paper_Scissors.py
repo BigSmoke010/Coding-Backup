@@ -6,7 +6,6 @@ choices = ["Rock", "Paper", "Scissors"]
 b = random.choice(choices)
 retry = input("Do You Want To Play?:")
 
-
 if retry == "no":
     print("ok")
     sys.exit(0)

@@ -7,10 +7,7 @@ screen = pygame.display.set_mode((800, 600))
 clock = pygame.time.Clock()
 pygame.display.set_caption('pingpong')
 
-
-Player = pygame.image.load(
-    f"images/Untitled.png"
-).convert_alpha()
+Player = pygame.image.load(f"images/Untitled.png").convert_alpha()
 ball = pygame.image.load("images/ball.png").convert_alpha()
 font = pygame.font.Font("Fonts/Minecrafter.Reg.ttf", 50)
 font1 = pygame.font.Font("Fonts/ARCADECLASSIC.TTF", 80)
@@ -45,7 +42,8 @@ if twop == 'y':
     preffered_side = 'right'
 else:
     twoplayer = False
-    
+
+
 def draw(pref_side):
     global bottom
     global botmiddle
@@ -57,7 +55,7 @@ def draw(pref_side):
     global enemytop
     global font_rect_palyer
     global font_rect_bot
-    
+
     if pref_side == "left":
         bottom = Player.get_rect(topleft=[50, 350])
         botmiddle = Player.get_rect(topleft=[50, 325])
@@ -82,6 +80,7 @@ def draw(pref_side):
         font_rect_palyer = (500, 100)
         font_rect_bot = (300, 100)
 
+
 while running:
     screen.fill("#948282")
     for event in pygame.event.get():
@@ -103,7 +102,7 @@ while running:
                     playergravity = 0
                 if event.key == pygame.K_w or event.key == pygame.K_s:
                     enemygravity = 0
-            
+
             if locked:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
@@ -135,7 +134,7 @@ while running:
             enemygravity = 5
         if ballrect.y == enemybotmiddle.y and not twoplayer:
             enemygravity = 0
-            
+
         if ballrect.y <= 0:
             ballgravity = ballspeed
             beep1.play()
@@ -329,8 +328,9 @@ while running:
         title = font1.render("Select your side", False, "yellow")
         screen.blit(title, (110, 400))
         mouse_pos = pygame.mouse.get_pos()
-        if  mouse_pos[0] < 400:
-            pygame.draw.rect(screen, '#550000', pygame.rect.Rect(0, 0, 400, 600))
+        if mouse_pos[0] < 400:
+            pygame.draw.rect(screen, '#550000',
+                             pygame.rect.Rect(0, 0, 400, 600))
             title = font1.render("PING PONG", False, "orange")
             screen.blit(title, (220, 100))
             title = font1.render("Select your side", False, "yellow")
@@ -341,7 +341,8 @@ while running:
                 draw(preffered_side)
                 game = 1
         if mouse_pos[0] > 400:
-            pygame.draw.rect(screen, '#550000', pygame.rect.Rect(400, 0, 400, 600))
+            pygame.draw.rect(screen, '#550000',
+                             pygame.rect.Rect(400, 0, 400, 600))
             title = font1.render("PING PONG", False, "orange")
             screen.blit(title, (220, 100))
             title = font1.render("Select your side", False, "yellow")

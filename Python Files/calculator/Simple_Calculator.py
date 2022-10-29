@@ -1,6 +1,7 @@
 import math
 import fire
 
+
 def calc(x, y, z=None) -> int:
 
     if y == "/":
@@ -11,7 +12,7 @@ def calc(x, y, z=None) -> int:
         result1 = x * z
         print(f"{x} * {z} = {result1}")
 
-    elif y == "-":
+    elif y == "m":
         result2 = x - z
         print(f"{x} - {z} = {result2}")
 

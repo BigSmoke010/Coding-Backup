@@ -8,8 +8,7 @@ root.configure(bg="white")
 num_list = [0, 1, 2]
 
 img = ImageTk.PhotoImage(
-    Image.open("images/4-42120_bleed-area-may-not-be-visible-meme-troll.jpg")
-)
+    Image.open("images/4-42120_bleed-area-may-not-be-visible-meme-troll.jpg"))
 back = Label(root, image=img)
 back.place(x=0, y=0, relwidth=1, relheight=1)
 
@@ -39,6 +38,5 @@ root.rowconfigure(1, minsize=180)
 root.columnconfigure(1, minsize=140)
 root.rowconfigure(2, minsize=180)
 root.columnconfigure(2, minsize=140)
-
 
 root.mainloop()

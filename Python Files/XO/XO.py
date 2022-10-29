@@ -5,9 +5,7 @@ from PIL import ImageTk, Image
 
 root = Tk()
 root.title("XO")
-background_image = ImageTk.PhotoImage(
-    Image.open(r"images/XO1.png")
-)
+background_image = ImageTk.PhotoImage(Image.open(r"images/XO1.png"))
 background_label = Label(root, image=background_image)
 background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
@@ -109,55 +107,64 @@ def clear():
     tl = Button(
         root,
         text="...",
-        command=lambda var="tl", a=1, b=0: [click(var, a, b), scndplyr(var, a, b)],
+        command=lambda var="tl", a=1, b=0:
+        [click(var, a, b), scndplyr(var, a, b)],
     )
     tl.grid(row=1, column=0)
     t = Button(
         root,
         text="...",
-        command=lambda var="t", a=1, b=1: [click(var, a, b), scndplyr(var, a, b)],
+        command=lambda var="t", a=1, b=1:
+        [click(var, a, b), scndplyr(var, a, b)],
     )
     t.grid(row=1, column=1)
     tr = Button(
         root,
         text="...",
-        command=lambda var="tr", a=1, b=2: [click(var, a, b), scndplyr(var, a, b)],
+        command=lambda var="tr", a=1, b=2:
+        [click(var, a, b), scndplyr(var, a, b)],
     )
     tr.grid(row=1, column=2)
     ml = Button(
         root,
         text="...",
-        command=lambda var="ml", a=2, b=0: [click(var, a, b), scndplyr(var, a, b)],
+        command=lambda var="ml", a=2, b=0:
+        [click(var, a, b), scndplyr(var, a, b)],
     )
     ml.grid(row=2, column=0)
     m = Button(
         root,
         text="...",
-        command=lambda var="m", a=2, b=1: [click(var, a, b), scndplyr(var, a, b)],
+        command=lambda var="m", a=2, b=1:
+        [click(var, a, b), scndplyr(var, a, b)],
     )
     m.grid(row=2, column=1)
     mr = Button(
         root,
         text="...",
-        command=lambda var="mr", a=2, b=2: [click(var, a, b), scndplyr(var, a, b)],
+        command=lambda var="mr", a=2, b=2:
+        [click(var, a, b), scndplyr(var, a, b)],
     )
     mr.grid(row=2, column=2)
     bl = Button(
         root,
         text="...",
-        command=lambda var="bl", a=3, b=0: [click(var, a, b), scndplyr(var, a, b)],
+        command=lambda var="bl", a=3, b=0:
+        [click(var, a, b), scndplyr(var, a, b)],
     )
     bl.grid(row=3, column=0)
     b = Button(
         root,
         text="...",
-        command=lambda var="b", a=3, b=1: [click(var, a, b), scndplyr(var, a, b)],
+        command=lambda var="b", a=3, b=1:
+        [click(var, a, b), scndplyr(var, a, b)],
     )
     b.grid(row=3, column=1)
     br = Button(
         root,
         text="...",
-        command=lambda var="br", a=3, b=2: [click(var, a, b), scndplyr(var, a, b)],
+        command=lambda var="br", a=3, b=2:
+        [click(var, a, b), scndplyr(var, a, b)],
     )
     br.grid(row=3, column=2)
 
@@ -176,7 +183,8 @@ def clear():
         ("br", br),
     ]
 
-    vs1 = [(1, 0), (1, 1), (1, 2), (2, 0), (2, 1), (2, 2), (3, 0), (3, 1), (3, 2)]
+    vs1 = [(1, 0), (1, 1), (1, 2), (2, 0), (2, 1), (2, 2), (3, 0), (3, 1),
+           (3, 2)]
 
     vs = [
         tl,
@@ -544,58 +552,66 @@ cho.grid(row=0, column=0)
 tl = Button(
     root,
     text="...",
-    command=lambda var="tl", a=1, b=0: [click(var, a, b), scndplyr(var, a, b)],
+    command=lambda var="tl", a=1, b=0: [click(var, a, b),
+                                        scndplyr(var, a, b)],
 )
 tl.grid(row=1, column=0)
 t = Button(
     root,
     text="...",
-    command=lambda var="t", a=1, b=1: [click(var, a, b), scndplyr(var, a, b)],
+    command=lambda var="t", a=1, b=1: [click(var, a, b),
+                                       scndplyr(var, a, b)],
 )
 t.grid(row=1, column=1)
 tr = Button(
     root,
     text="...",
-    command=lambda var="tr", a=1, b=2: [click(var, a, b), scndplyr(var, a, b)],
+    command=lambda var="tr", a=1, b=2: [click(var, a, b),
+                                        scndplyr(var, a, b)],
 )
 tr.grid(row=1, column=2)
 ml = Button(
     root,
     text="...",
-    command=lambda var="ml", a=2, b=0: [click(var, a, b), scndplyr(var, a, b)],
+    command=lambda var="ml", a=2, b=0: [click(var, a, b),
+                                        scndplyr(var, a, b)],
 )
 ml.grid(row=2, column=0)
 m = Button(
     root,
     text="...",
-    command=lambda var="m", a=2, b=1: [click(var, a, b), scndplyr(var, a, b)],
+    command=lambda var="m", a=2, b=1: [click(var, a, b),
+                                       scndplyr(var, a, b)],
 )
 m.grid(row=2, column=1)
 mr = Button(
     root,
     text="...",
-    command=lambda var="mr", a=2, b=2: [click(var, a, b), scndplyr(var, a, b)],
+    command=lambda var="mr", a=2, b=2: [click(var, a, b),
+                                        scndplyr(var, a, b)],
 )
 mr.grid(row=2, column=2)
 bl = Button(
     root,
     text="...",
-    command=lambda var="bl", a=3, b=0: [click(var, a, b), scndplyr(var, a, b)],
+    command=lambda var="bl", a=3, b=0: [click(var, a, b),
+                                        scndplyr(var, a, b)],
 )
 bl.grid(row=3, column=0)
 b = Button(
     root,
     text="...",
-    command=lambda var="b", a=3, b=1: [click(var, a, b), scndplyr(var, a, b)],
+    command=lambda var="b", a=3, b=1: [click(var, a, b),
+                                       scndplyr(var, a, b)],
 )
 b.grid(row=3, column=1)
 br = Button(
     root,
     text="...",
-    command=lambda var="br", a=3, b=2: [click(var, a, b), scndplyr(var, a, b)],
+    command=lambda var="br", a=3, b=2: [click(var, a, b),
+                                        scndplyr(var, a, b)],
 )
 br.grid(row=3, column=2)
-
 
 clr = Button(root, text="clear", command=clear)
 clr.grid(row=0, column=2)
