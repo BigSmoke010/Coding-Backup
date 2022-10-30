@@ -15,6 +15,7 @@ class economy(commands.Cog):
         cursor = db.cursor()
         cursor.execute('CREATE TABLE IF NOT EXISTS users(username,id,balance)')
         cursor.execute('CREATE TABLE IF NOT EXISTS workcooldown(userid,expiredate)')
+        cursor.execute('CREATE TABLE IF NOT EXISTS betcooldowns (memberid, expiration)')
         cursor.execute("SELECT * FROM users")
         valid = cursor.fetchall()
         tmplist = []
@@ -62,25 +63,15 @@ class economy(commands.Cog):
         db.close()
 
     @commands.command(name='balance')
-    async def bal(self, ctx, *, user : discord.Member):
+    async def bal(self, ctx, user : discord.Member = None):
         db = sql.connect('economydb.db')
         cursor = db.cursor()
         cursor.execute("SELECT * FROM users")
         valid = cursor.fetchall()
         for i in valid:
-            if not user:
-                if i[1] == ctx.author.id:
+            if i[1] == user.id:
                     embed = discord.Embed(color=7377330,
-                                        title=ctx.author.name + '\'s balance',
-                                        description='**Balance**\n`' +
-                                        str(i[2]) + '`')
-                    await ctx.send(embed=embed)
-                    cursor.close()
-                    db.close()
-            else:
-                if i[1] == user:
-                    embed = discord.Embed(color=7377330,
-                                        title=ctx.author.name + '\'s balance',
+                                        title=user.name + '\'s balance',
                                         description='**Balance**\n`' +
                                         str(i[2]) + '`')
                     await ctx.send(embed=embed)
@@ -102,97 +93,14 @@ class economy(commands.Cog):
                 tmplist = []
                 cursor.execute("SELECT * FROM workcooldown")
                 allcooldowns = cursor.fetchall()
-
-                print(allcooldowns)
-                if allcooldowns == []:
-                    x = random.randrange(0, 100)
-                    if x < 1:
-                        amount = random.choice(range(10000, 60000))
-                        await ctx.send(random.choice(listofworks) + str(amount))
-                        print(amount)
-                    if x < 30 and not x<1:
-                        amount = random.choice(range(1000, 2000))
-                        await ctx.send(random.choice(listofworks) + str(amount))
-                        print(amount)
-                        print('lowe prob')
-                    if x < 60 and not x< 30 and not x<1:
-                        amount = random.choice(range(551, 900))
-                        await ctx.send(random.choice(listofworks) + str(amount))
-                        print(amount)
-                        print('medium prob')
-                    if x < 100 and not x < 60 and not x< 30 and not x<1:
-                        amount = random.choice(range(200, 550))
-                        await ctx.send(random.choice(listofworks) + str(amount))
-                        print(amount)
-                        print('highest prob')
-                    cursor.execute('SELECT * FROM users WHERE id ='  + str(ctx.author.id))
-                    selecteduser = cursor.fetchone()
-                    total = selecteduser[2] + amount
-                    cursor.execute('UPDATE users SET balance = :total WHERE id = :authorid',
-                    {
-                        'total' : amount,
-                        'authorid' : ctx.author.id
-                    })
-                    cursor.execute('INSERT INTO workcooldown VALUES (:userid,:plusonehour)',
-                    {
-                        'userid' : ctx.author.id,
-                        'plusonehour' : plusonehour
-                    })
-
-                    db.commit()
-                    cursor.close()
-                    db.close()
-
-                else:
-                    for x in allcooldowns:
-                        tmplist.append(x[0])
-
-
-                    if ctx.author.id in tmplist:
-                        if datetime.datetime.strptime(x[1], '%Y-%m-%d %H:%M:%S.%f') < datetime.datetime.now():
-                            cursor.execute('DELETE FROM workcooldown WHERE id ='+ str(ctx.author.id))
-                            x = random.randrange(0, 100)
-                            if x < 1:
-                                amount = random.choice(range(10000, 60000))
-                                await ctx.send(random.choice(listofworks) + str(amount))
-                                print(amount)
-                            if x < 30 and not x<1:
-                                amount = random.choice(range(1000, 2000))
-                                await ctx.send(random.choice(listofworks) + str(amount))
-                                print(amount)
-                                print('lowe prob')
-                            if x < 60 and not x< 30 and not x<1:
-                                amount = random.choice(range(551, 900))
-                                await ctx.send(random.choice(listofworks) + str(amount))
-                                print(amount)
-                                print('medium prob')
-                            if x < 100 and not x < 60 and not x< 30 and not x<1:
-                                amount = random.choice(range(200, 550))
-                                await ctx.send(random.choice(listofworks) + str(amount))
-                                print(amount)
-                                print('highest prob')
-                            cursor.execute('SELECT * FROM users WHERE id ='  + str(ctx.author.id))
-                            selecteduser = cursor.fetchone()
-                            total = selecteduser[2] + amount
-                            cursor.execute('UPDATE users SET balance = :total WHERE id = :authorid',
-                            {
-                                'total' : amount,
-                                'authorid' : ctx.author.id
-                            })
-                            cursor.execute('INSERT INTO workcooldown VALUES (:userid,:plusonehour)',
-                            {
-                                'userid' : ctx.author.id,
-                                'plusonehour' : plusonehour
-                            })
-                            db.commit()
-                        elif datetime.datetime.strptime(x[1], '%Y-%m-%d %H:%M:%S.%f')  > datetime.datetime.now():
-                            await ctx.send('you are on cooldown')
-                            cursor.close()
-                            db.close()
-                    elif ctx.author.id not in tmplist:
+                for x in allcooldowns:
+                    tmplist.append(x[0])
+                if ctx.author.id in tmplist:
+                    if datetime.datetime.strptime(x[1], '%Y-%m-%d %H:%M:%S.%f') < datetime.datetime.now():
+                        cursor.execute('DELETE FROM workcooldown WHERE userid ='+ str(ctx.author.id))
                         x = random.randrange(0, 100)
                         if x < 1:
-                            amount = random.choice(range(10000, 60000))
+                            amount = random.choice(range(10000, 100000))
                             await ctx.send(random.choice(listofworks) + str(amount))
                             print(amount)
                         if x < 30 and not x<1:
@@ -210,7 +118,6 @@ class economy(commands.Cog):
                             await ctx.send(random.choice(listofworks) + str(amount))
                             print(amount)
                             print('highest prob')
-
                         cursor.execute('SELECT * FROM users WHERE id ='  + str(ctx.author.id))
                         selecteduser = cursor.fetchone()
                         total = selecteduser[2] + amount
@@ -224,13 +131,117 @@ class economy(commands.Cog):
                             'userid' : ctx.author.id,
                             'plusonehour' : plusonehour
                         })
+                        db.commit()
+                    elif datetime.datetime.strptime(x[1], '%Y-%m-%d %H:%M:%S.%f')  > datetime.datetime.now():
+                        await ctx.send('you are on cooldown')
+                        cursor.close()
+                        db.close()
+                elif ctx.author.id not in tmplist:
+                    x = random.randrange(0, 100)
+                    if x < 1:
+                        amount = random.choice(range(10000, 100000))
+                        await ctx.send(random.choice(listofworks) + str(amount))
+                        print(amount)
+                    if x < 30 and not x<1:
+                        amount = random.choice(range(1000, 2000))
+                        await ctx.send(random.choice(listofworks) + str(amount))
+                        print(amount)
+                        print('lowe prob')
+                    if x < 60 and not x< 30 and not x<1:
+                        amount = random.choice(range(551, 900))
+                        await ctx.send(random.choice(listofworks) + str(amount))
+                        print(amount)
+                        print('medium prob')
+                    if x < 100 and not x < 60 and not x< 30 and not x<1:
+                        amount = random.choice(range(200, 550))
+                        await ctx.send(random.choice(listofworks) + str(amount))
+                        print(amount)
+                        print('highest prob')
+
+                    cursor.execute('SELECT * FROM users WHERE id ='  + str(ctx.author.id))
+                    selecteduser = cursor.fetchone()
+                    total = selecteduser[2] + amount
+                    cursor.execute('UPDATE users SET balance = :total WHERE id = :authorid',
+                    {
+                        'total' : total,
+                        'authorid' : ctx.author.id
+                    })
+                    cursor.execute('INSERT INTO workcooldown VALUES (:userid,:plusonehour)',
+                    {
+                        'userid' : ctx.author.id,
+                        'plusonehour' : plusonehour
+                    })
+
+                    db.commit()
+                    cursor.close()
+                    db.close()
+    @commands.command(name='bet')
+    async def bet(self, ctx, amountbet):
+        db = sql.connect('economydb.db')
+        cursor = db.cursor()
+        cursor.execute('SELECT * FROM users')
+        allusers = cursor.fetchall()
+        for i in allusers:
+            if i[1] == ctx.author.id:
+                cursor.execute('SELECT * FROM betcooldowns')
+                allcools = cursor.fetchall()
+                tmplist = []
+                for i in allcools:
+                    tmplist.append(allcools[0])
+
+                if random.randrange(0, 100) < 50:
+                    if i[2] > int(amountbet):
+
+                        newbal = int(i[2]) + int(amountbet)
+                        cursor.execute('UPDATE users SET balance = :newbal WHERE id = :userid',
+                        {
+                            'newbal' : newbal,
+                            'userid' : i[1]
+                        })
 
                         db.commit()
                         cursor.close()
                         db.close()
-    @commands.command(name='bet')
-    async def bet(self, ctx):
-        pass
+
+                        await ctx.send('you have won '+ str(amountbet))
+                        currenttime = datetime.datetime.now()
+                        nexttime = datetime.timedelta(minutes = 5) + currenttime
+                        cursor.execute('INSERT INTO  betcooldowns VALUES (:userid,:expirationdate)',
+                        {
+                            'userid' : ctx.author.id,
+                            'expirationdate' : nexttime
+                        })
+                    else:
+                        await ctx.send('you betted more money than you have!')
+                        cursor.close()
+                        db.close()
+
+
+
+                else:
+                    if i[2] > int(amountbet):
+                        newbal = int(i[2]) - int(amountbet)
+                        cursor.execute('UPDATE users SET balance = :newbal WHERE id = :userid',
+                        {
+                            'newbal' : newbal,
+                            'userid' : i[1]
+                        })
+                        currenttime = datetime.datetime.now()
+                        nexttime = datetime.timedelta(minutes = 5) + currenttime
+                        cursor.execute('INSERT INTO  betcooldowns VALUES (:userid,:expirationdate)',
+                        {
+                            'userid' : ctx.author.id,
+                            'expirationdate' : nexttime
+                        })
+                        db.commit()
+                        cursor.close()
+                        db.close()
+
+                        await ctx.send('you have lost '+ str(amountbet))
+                    else:
+                        await ctx.send('you betted more money than you have!')
+                        cursor.close()
+                        db.close()
 
 async def setup(bot):
     await bot.add_cog(economy(bot))
