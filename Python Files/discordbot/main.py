@@ -11,8 +11,8 @@ bot = commands.Bot(command_prefix='p#', intents=discord.Intents.all())
 @bot.event
 async def on_ready():
 
-    game = discord.Game("with my balls.")
-    await bot.change_presence(status=discord.Status.idle, activity=game)
+    game = discord.Game("with filippas juicy fat big penis.")
+    await bot.change_presence(activity=game)
     for filename in os.listdir("./cogs"):
         if filename.endswith(".py"):
             # cut off the .py from the file name

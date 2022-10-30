@@ -9,9 +9,12 @@ class miscelanous(commands.Cog):
 
     @commands.command(name='pfp')
     async def pfp(self, ctx, idd: discord.Member = None):
-        embd = discord.Embed(title=str(idd.name) + '\'s pfp').set_image(
-            idd.avatar.url)
-        await ctx.send(embed=embd)
+        if not idd:
+            embd = discord.Embed(title=str(idd.name) + '\'s pfp').set_image(
+                idd.avatar.url)
+            await ctx.send(embed=embd)
+        else:
+            print('none mentioned')
 
     @commands.command(name='say')
     async def goodmorning(self, ctx):
