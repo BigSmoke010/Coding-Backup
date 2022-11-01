@@ -1,2 +1,4 @@
 '/Python Files/discordbot/.env'
 *.env
+.vscode/
+__pycache__/
