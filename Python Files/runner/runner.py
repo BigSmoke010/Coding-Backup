@@ -8,37 +8,37 @@ pygame.display.set_caption("runnin")
 clock = pygame.time.Clock()
 
 background = pygame.image.load(
-    "/home/walid/Coding/Python Files/images/runin/cartoon orange autumn leaves.jpg"
+    "./images/runin/cartoon orange autumn leaves.jpg"
 ).convert_alpha()
 enemy = pygame.image.load(
-    "/home/walid/Coding/Python Files/images/runin/mushroom.png").convert_alpha(
+    "./images/runin/mushroom.png").convert_alpha(
     )
 enemy = pygame.transform.scale(enemy, (50, 50))
 enemy1 = pygame.image.load(
-    "/home/walid/Coding/Python Files/images/runin/mushroom.png").convert_alpha(
+    "./images/runin/mushroom.png").convert_alpha(
     )
 enemy1 = pygame.transform.scale(enemy, (50, 50))
 enemy2 = pygame.image.load(
-    "/home/walid/Coding/Python Files/images/runin/mushroom.png").convert_alpha(
+    "./images/runin/mushroom.png").convert_alpha(
     )
 enemy2 = pygame.transform.scale(enemy, (50, 50))
 bomb = pygame.image.load(
-    "/home/walid/Coding/Python Files/images/runin/Bomb.png").convert_alpha()
+    "./images/runin/Bomb.png").convert_alpha()
 bomb = pygame.transform.scale(bomb, (30, 50))
 flyingenemy = pygame.image.load(
-    "/home/walid/Coding/Python Files/images/runin/eagle.png").convert_alpha()
+    "./images/runin/eagle.png").convert_alpha()
 flyingenemy = pygame.transform.scale(flyingenemy, (50, 50))
 ground = pygame.image.load(
-    "/home/walid/Coding/Python Files/images/runin/ground.png").convert_alpha()
+    "./images/runin/ground.png").convert_alpha()
 heroz = pygame.image.load(
-    "/home/walid/Coding/Python Files/images/runin/superhero.png"
+    "./images/runin/superhero.png"
 ).convert_alpha()
 walkin1 = pygame.image.load(
-    "/home/walid/Coding/Python Files/images/runin/walkin1.png").convert_alpha(
+    "./images/runin/walkin1.png").convert_alpha(
     )
 walkin1 = pygame.transform.scale(walkin1, (50, 50))
 walkin2 = pygame.image.load(
-    "/home/walid/Coding/Python Files/images/runin/walkin2.png").convert_alpha(
+    "./images/runin/walkin2.png").convert_alpha(
     )
 walkin2 = pygame.transform.scale(walkin2, (50, 50))
 walkindex = 1
@@ -64,8 +64,8 @@ tup = [
 ]
 litup = []
 font = pygame.font.Font(
-    "/home/walid/Coding/Python Files/Fonts/ARCADECLASSIC.TTF", 40)
-font1 = pygame.font.Font("/home/walid/Coding/Python Files/Fonts/ARCADE.TTF",
+    "./Fonts/ARCADECLASSIC.TTF", 40)
+font1 = pygame.font.Font("./Fonts/ARCADE.TTF",
                          40)
 
 score = 0
@@ -254,13 +254,13 @@ while runing:
     elif game == 3:
         screen.fill("#4A1EFF")
         herobg = pygame.image.load(
-            "/home/walid/Coding/Python Files/images/runin/City-Cartoon-Wallpaper.jpg"
+            "./images/runin/City-Cartoon-Wallpaper.jpg"
         )
         herobg = pygame.transform.scale(herobg, (800, 600))
         screen.blit(herobg, (0, 0))
 
         heroimg = pygame.image.load(
-            "/home/walid/Coding/Python Files/images/runin/Untitled.png")
+            "./images/runin/Untitled.png")
         screen.blit(heroimg, (-20, 0))
 
         gametitle = font.render("runner", False, "#89FF1E")
