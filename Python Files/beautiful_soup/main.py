@@ -14,7 +14,9 @@ def jobityjab():
         ).text,
         "lxml",
     )
+
     jobli = page.find_all("li", class_="clearfix job-bx wht-shd-bx")
+
     for index, i in enumerate(jobli):
         company = i.find("h3",
                          class_="joblist-comp-name").text.replace(" ", "")
